@@ -1,0 +1,17 @@
+{% extends 'quotes/base.html' %}
+
+  {% block content %}
+  <h1> All Pictures and Quotes</h1>
+  <!-- Display and go through all photos -->
+  <h2> Pictures </h2>
+  {% for pic in allp %}
+    <img src="{{ pic }}" alt="Adam Sandler picture">
+  {% endfor %}
+  <!-- Display and go through all quotes -->
+  <h2> Quotes </h2>
+  <ul>
+    {% for quote in allq %}
+    <li> {{ quote }} </li>
+    {% endfor %}
+  </ul>
+  {% endblock %}

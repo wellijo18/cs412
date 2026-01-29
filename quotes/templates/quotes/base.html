@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+  <head>
+    <title>
+      Adam Sandler!
+    </title> 
+    <link rel="stylesheet" href="{% static 'newstyles.css' %}" > 
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="{% url 'quote_page' %}">Quote</a></li>
+        <li><a href="{% url 'about_page' %}">About</a></li>
+        <li><a href="{% url 'show_all_page' %}">Show All</a></li>
+      </ul>
+    </nav>
+    <!-- page specific content here-->
+    {% block content %}
+    {% endblock %}
+    <footer>
+    </footer>
+  </body>
+</html>
