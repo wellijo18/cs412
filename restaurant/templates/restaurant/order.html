@@ -1,0 +1,86 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<h1> Welcome to Broadway Dairy Maid </h1>
+<h2> Make ur selection below! </h2>
+
+<form action="{% url 'submit' %}" method="POST">
+  {% csrf_token %}
+  <!-- get all required customer info -->
+  <h3>Customer Information</h3>
+
+  Full Name:
+  <input type="text" name="daName" id="daName" required>
+  <br><br>
+  
+  Phone:
+  <input type="tel" name="daPhone" id="daPhone" required>
+  <br><br>
+  
+  Email:
+  <input type="email" name="daEmail" id="daEmail" required>
+  <br><br>
+  
+
+  <h3>Menu Items</h3>
+  
+    <!-- soft serve coen and all its selections (size and topings) -->
+  <div>
+      <input type="checkbox" name="daSoftServe" value="yes" id="daSoftServe">
+      <b>Soft Serve Cone</b> - $3.50
+      
+      <div class="item-options">
+          Size:
+          <input type="radio" name="softServeSize" value="small" id="sizeSmall"> Small
+          <input type="radio" name="softServeSize" value="medium" id="sizeMedium" checked> Medium (+$1.00)
+          <input type="radio" name="softServeSize" value="large" id="sizeLarge"> Large (+$2.00)
+          <br>
+
+          Toppings (select all that apply):<br>
+          <input type="checkbox" name="softServeToppings[]" value="sprinkles" id="sprinkles"> Rainbow sprinkles (+$0.50)<br>
+          <input type="checkbox" name="softServeToppings[]" value="chocolate" id="chocolate"> Chocolate (+$0.75)<br>
+          <input type="checkbox" name="softServeToppings[]" value="cherry" id="cherry"> Cherry on Top (+$0.25)
+      </div>
+  </div>
+
+  <br>
+  
+  <div>
+    <!-- milkshake drop down menu to select flavor -->
+      <input type="checkbox" name="daMilkshake" value="yes" id="daMilkshake">
+      <b>Classic Milkshake</b> - $5.50
+      
+      <div class="item-options">
+          Flavor:
+          <select name="milkshakeFlavor">
+              <option value="vanilla">Vanilla</option>
+              <option value="cookiesCream">Cookies & Cream</option>
+              <option value="chocolate">Chocolate</option>
+              <option value="strawberry">Strawberry</option>
+          </select>
+      </div>
+  </div>
+
+  <br>
+  
+
+  <div>
+      <input type="checkbox" name="daSundae" value="yes" id="daSundae">
+      <b>Ice Cream Sundae</b> - $6.00
+  </div>
+
+  <br>
+  
+  <!-- daily special which is passed in from view as we randomly grab it from the list of possible daily specials -->
+  <div>
+      <input type="checkbox" name="daDailySpecial" value="yes" id="daDailySpecial">
+      <b>Daily Special: {{ daSpecialName }}</b> - {{ daSpecialPrice }}
+      <input type="hidden" name="daSpecialName" value="{{ daSpecialName }}">
+      <input type="hidden" name="daSpecialPrice" value="{{ daSpecialPrice }}">
+  </div>
+
+
+  <input type="submit" value="Place Order">
+</form>
+
+{% endblock %}

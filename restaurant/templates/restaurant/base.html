@@ -1,0 +1,21 @@
+{% load static %}
+
+<html>
+  <head>
+    <title> Form Data Example </title>
+    <link rel="stylesheet" href="{% static 'newstyles.css' %}" > 
+
+  </head>
+  <!-- unique page per content -->
+  <body>
+    <nav>
+      <a href="{% url 'home_page' %}">Home</a>
+      <a href="{% url 'order_page' %}">Order</a>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+  </body>
+
+  
+</html>

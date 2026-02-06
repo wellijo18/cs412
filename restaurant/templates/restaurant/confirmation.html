@@ -1,0 +1,51 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div>
+  <h1>
+    Order Confirmation
+  </h1>
+  <!-- display customer info to show the order is under their name -->
+  <h2>Customer Information</h2>
+  <p><strong>Name:</strong> {{daName}}</p>
+  <p><strong>Phone:</strong> {{daPhone}}</p>
+  <p><strong>Email:</strong> {{daEmail}}</p>
+  <!-- display the order, we have to check if each one was even passed (customer selected item for their order) -->
+  <h2>Your Order</h2>
+  
+  {% if daSoftServe %}
+    <div>
+      <h3>Soft Serve Cone - $3.50</h3>
+      <p>Size: {{softServeSize}}</p>
+      {% if softServeToppings %}
+        <p>Toppings: {{softServeToppings|join:", "}}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if daMilkshake %}
+    <div>
+      <h3>Classic Milkshake - $5.50</h3>
+      <p>Flavor: {{milkshakeFlavor}}</p>
+    </div>
+  {% endif %}
+
+  {% if daSundae %}
+    <div>
+      <h3>Ice Cream Sundae - $6.00</h3>
+    </div>
+  {% endif %}
+
+  {% if daDailySpecial %}
+  <div>
+    <h3>Daily Special: {{daSpecialName}} - {{daSpecialPrice}}</h3>
+  </div>
+  {% endif %}
+  <!-- display total price -->
+  <h2>Total</h2>
+  <h3>{{ total }}</h3>
+  <!-- pass in randomly calcualted time -->
+  <p>Your order will be ready around {{ readyTime }}!</p>
+
+</div>
+{% endblock %}

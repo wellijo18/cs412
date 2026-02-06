@@ -1,56 +1,243 @@
-img {
-  max-width: 30vw;
-  max-height: 30vw;
-}
-
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
-  gap: 2vw;
-}
-
-.image-grid img {
-  width: 100%;
-  height: auto;
-}
-
 body {
-  margin: 0;
-  padding: 4vw;
-  background: #f4f8ff;
-  color: #1e3a8a;
+  background-color: #f4f9ff;
+  color: #1f3a5f;
+  font-family: Arial, sans-serif;
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 20px;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 3vw 0;
-  display: flex;
-  gap: 3vw;
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  background: #e6f0ff;
+  margin: 0 0 10px 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #0f2a44;
+}
+
+a, a:visited {
+  color: #1d5fa7;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0b3d91;
+  background-color: #eef6ff;
+}
+
+header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #e6f0ff;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  padding: 10px 20px;
+  border-bottom: 2px solid #9cc4ff;
+}
+
+footer {
+  width: 100%;
+  background: #e6f0ff;
+  position: fixed;
+  bottom: 0;
+  padding: 8px 20px;
+  border-top: 2px solid #9cc4ff;
+}
+
+.wrapper {
+  border: 2px solid #9cc4ff;
+  border-radius: 12px;
+  max-width: 100%;
+  position: relative;
+  top: 70px;
+  padding: 20px;
+  background: white;
+}
+
+div.wrapper h1 {
+  text-align: center;
+  color: #0b3d91;
+  margin: 12px auto;
+  font-size: 2.4em;
+}
+
+div.wrapper h2 {
+  text-align: left;
+  color: #1d5fa7;
+  margin: 8px auto;
+  font-size: 2em;
+}
+
+section {
+  border: 2px solid #1d5fa7;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+  background: #f8fbff;
+}
+
+nav {
+  justify-self: end;
+  background: none;
+  color: #0b3d91;
 }
 
 nav li {
-  font-size: 1.4vw;
-  color: #1d4ed8;
+  display: inline-block;
+  margin-left: 20px;
 }
 
-h1 {
-  font-size: 4vw;
-  margin-bottom: 2vw;
-  color: #1e40af;
+nav button {
+  background: none;
+  color: #1d5fa7;
+  font-family: Arial;
+  cursor: pointer;
+  border: 0;
+  font-size: 1.1em;
 }
 
-p {
-  font-size: 1.4vw;
-  margin-bottom: 2vw;
+nav button:hover {
+  color: #0b3d91;
 }
 
-ul {
-  padding-left: 3vw;
-  margin-bottom: 3vw;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
-li {
-  font-size: 1.3vw;
-  margin-bottom: 1vw;
+th, td {
+  border: 1px solid #9cc4ff;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #e6f0ff;
+  color: #0b3d91;
+}
+
+tr:nth-child(even) {
+  background-color: #f4f9ff;
+}
+
+.mc-table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.mc-table-head {
+  border: 1px solid #1d5fa7;
+  display: table-row;
+  font-size: 1.1em;
+  background: #e6f0ff;
+}
+
+.mc-table-head .detail {
+  display: table-cell;
+  color: #0b3d91;
+  font-weight: bold;
+  padding: 8px;
+}
+
+.mc-table-row {
+  display: table-row;
+  border: 1px solid #9cc4ff;
+  background-color: white;
+}
+
+.mc-table-row .detail {
+  color: #1d5fa7;
+  display: table-cell;
+  padding: 8px;
+}
+
+.mc-table-row:hover {
+  background-color: #eef6ff;
+  border-color: #1d5fa7;
+}
+
+.site-form {
+  margin-top: 15px;
+  padding: 15px;
+  background: #f8fbff;
+  border-radius: 12px;
+  border: 1px solid #9cc4ff;
+}
+
+.site-form input,
+.site-form textarea,
+.site-form select {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #9cc4ff;
+  font-size: 1em;
+}
+
+.site-form input[type="submit"] {
+  background: #1d5fa7;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.site-form input[type="submit"]:hover {
+  background: #0b3d91;
+}
+
+.helptext, .helptext.ul {
+  color: #6b8fb8;
+  font-size: 0.9em;
+}
+
+.errorlist li {
+  padding: 10px;
+  list-style-type: none;
+  border: 1px solid #c62828;
+  color: #c62828;
+  margin: 10px 0;
+  background: #ffebee;
+  border-radius: 6px;
+}
+
+.errorlist {
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 560px) {
+  header h1 {
+      font-size: 0.9em;
+  }
+
+  nav li {
+      display: block;
+      margin-left: 0;
+      font-size: 14px;
+      width: 100%;
+  }
+
+  nav button {
+      font-size: 18px;
+  }
+
+  img {
+      max-width: 95%;
+  }
 }
