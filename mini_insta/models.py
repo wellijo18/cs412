@@ -9,8 +9,7 @@ class Profile(models.Model):
   profile_image_url = models.URLField(blank=True)
   bio_text=models.TextField(blank=True)
   join_date=models.DateTimeField(auto_now=True)
-  # user_followers=models.IntegerField(blank=True)
-  # user_follows=models.IntegerField(blank=True)
+ 
 
   def __str__(self):
     '''return a string representation of this model'''
