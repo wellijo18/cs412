@@ -16,7 +16,7 @@ pics = [
 
 def quote(request):
   template_name = "quotes/quote.html"
-  context ={
+  context = {
     "pict": random.choice(pics),
     "quot": random.choice(quotes),
   }

@@ -1,0 +1,28 @@
+{% extends 'mini_insta/base.html' %}
+
+
+{% block content %}
+<!-- mini_insta/show_all_profiles.html -->
+<h1> All Profiles</h1>
+
+
+<main class="grid-container">
+  <!-- sort through all profiles to display each one -->
+  {% for profile in profiles %}
+
+  <article>
+    <!-- display all wanted profile info -->
+    <div>
+      <h2>{{profile.display_name}}</h2>
+      <h3>@ {{profile.username}}</h3>
+    </div>
+    <a href="{% url 'profile' profile.pk %}">
+    <img src="{{profile.profile_image_url}}" alt="">
+    </a>
+    
+  </article>
+  <hr>
+
+  {% endfor %}
+</main>
+{% endblock %}

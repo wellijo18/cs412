@@ -1,0 +1,21 @@
+{% load static %}
+<!-- mini_insta/base.html      base html page -->
+<html>
+  <head>
+    <h1>Mini Insta</h1>
+    <link rel="stylesheet" href="{% static 'styles-blog.css' %}">
+  </head>
+  <!-- content from pages that will extend off of base -->
+  <body>
+    {% block content %}
+    {% endblock %}
+  </body>
+  <footer>
+    <!-- nav to go back to see all profiles -->
+    <nav>
+      <ul>
+        <li><a href="{% url 'show_all_profiles' %}">Show All</a></li>
+      </ul>
+    </nav>
+  </footer>
+</html>

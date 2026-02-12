@@ -1,0 +1,26 @@
+{% extends 'mini_insta/base.html' %}
+<!-- mini_insta/show_profile.html         for individual profiles -->
+
+{% block content %}
+<h1> {{profile.display_name}} </h1>
+
+
+<main class="single-profile-container">
+
+
+  <article>
+    <!-- display a single profiles information -->
+    <div>
+      <h2>{{profile.display_name}}</h2>
+      <h3>@ {{profile.username}}</h3>
+      <p>
+       {{profile.bio_text}}
+      </p>
+    </div>
+    <img src="{{profile.profile_image_url}}" alt="">
+    
+  </article>
+  <hr>
+
+</main>
+{% endblock %}

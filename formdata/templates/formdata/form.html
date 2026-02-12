@@ -13,3 +13,9 @@
   </form>
 </div>
 {% endblock %}
+
+
+<form action="{% url 'submit' %}" method="POST">
+  {% csrf_token %}
+  favorite color: <input type="text" name="favorite_color">
+</form>

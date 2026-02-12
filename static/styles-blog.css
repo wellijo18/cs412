@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f4f8ff;
+    color: #1f2937;
+  }
+  
+  h1 {
+    text-align: center;
+    margin: 24px 0;
+    font-weight: 700;
+    color: #1e3a8a;
+  }
+  
+  nav {
+    background: #1e40af;
+    padding: 14px 22px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  nav a:hover {
+    opacity: 0.85;
+  }
+  
+  .grid-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  
+  article {
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #dbeafe;
+    overflow: hidden;
+    transition: transform 0.08s ease;
+  }
+  
+  article:hover {
+    transform: translateY(-2px);
+  }
+  
+  article div {
+    padding: 14px 16px;
+  }
+  
+  article h2 {
+    margin: 0;
+    font-size: 17px;
+    color: #1e3a8a;
+  }
+  
+  article h3 {
+    margin: 4px 0 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2563eb;
+  }
+  
+  article img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  hr {
+    display: none;
+  }
+  
+  .single-profile-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 18px 22px;
+  }
