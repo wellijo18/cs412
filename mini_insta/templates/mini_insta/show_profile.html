@@ -37,10 +37,14 @@
         <!-- attach image if there is, no image if there isnt -->
         {% for photo in post.get_all_photos %}
           {% if forloop.first %}
+          <a href="{% url 'post' post.pk %}">
             <img src="{{ photo.image_url }}" alt="" width="150">
+          </a>
           {% endif %}
         {% empty %}
+        <a href="{% url 'post' post.pk %}">
           <img src="/static/no-image.png" alt="no image" width="150">
+        </a>
         {% endfor %}
       </td>
 
