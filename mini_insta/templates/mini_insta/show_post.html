@@ -1,0 +1,27 @@
+{% extends 'mini_insta/base.html' %}
+<!-- mini_insta/show_post.html -->
+
+{% block content %}
+<h1>Post</h1>
+
+<main class="single-post-container">
+
+  <article>
+    <!--show caption for post -->
+    <div>
+      <h2>{{ post.caption }}</h2>
+      <p>Posted at {{ post.timestamp }}</p>
+    </div>
+  </article>
+
+  <hr>
+
+  <!-- Display photos for this post -->
+  {% for photo in post.get_all_photos %}
+    <img src="{{ photo.image_url }}" alt="">
+  {% empty %}
+    <img src="/static/no-image.png" alt="no image">
+  {% endfor %}
+
+</main>
+{% endblock %}

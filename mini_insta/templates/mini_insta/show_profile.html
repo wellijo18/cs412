@@ -1,30 +1,53 @@
 {% extends 'mini_insta/base.html' %}
-<!-- mini_insta/show_profile.html         for individual profiles -->
+<!-- mini_insta/show_profile.html -->
 
 {% block content %}
-<h1> {{profile.display_name}} </h1>
-
+<h1>{{ profile.display_name }}</h1>
 
 <main class="single-profile-container">
 
-
   <article>
-    <!-- display a single profiles information -->
+    <!-- display profile info -->
     <div>
-      <h2>{{profile.display_name}}</h2>
-      <h3>@ {{profile.username}}</h3>
-      <p>
-       {{profile.bio_text}}
-      </p>
-      <p> Joined on {{profile.join_date}}</p>
-      <p> 0 Followers </p>
-      <p> 0 Following </p>
-      <p> 0 Posts</p>
+      <h2>{{ profile.display_name }}</h2>
+      <h3>@ {{ profile.username }}</h3>
+      <p>{{ profile.bio_text }}</p>
+      <p>Joined on {{ profile.join_date }}</p>
+      <p>0 Followers</p>
+      <p>0 Following</p>
+      <p>0 Posts</p>
     </div>
-    <img src="{{profile.profile_image_url}}" alt="">
-    
+
+    <img src="{{ profile.profile_image_url }}" alt="">
   </article>
+<!-- display post if profile has any -->
   <hr>
+  <h2>Posts:</h2>
+  <table>
+    {% for post in profile.get_all_posts %}
+    <tr>
+
+      <td>
+        <a href="{% url 'post' post.pk %}">
+          {{ post.caption }}
+        </a>
+      </td>
+
+      <td>
+        <!-- attach image if there is, no image if there isnt -->
+        {% for photo in post.get_all_photos %}
+          {% if forloop.first %}
+            <img src="{{ photo.image_url }}" alt="" width="150">
+          {% endif %}
+        {% empty %}
+          <img src="/static/no-image.png" alt="no image" width="150">
+        {% endfor %}
+      </td>
+
+    </tr>
+    {% endfor %}
+
+  </table>
 
 </main>
 {% endblock %}
