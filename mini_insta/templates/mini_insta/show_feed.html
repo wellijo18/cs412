@@ -1,0 +1,42 @@
+{% extends 'mini_insta/base.html' %}
+<!-- mini_insta/show_feed.html -->
+
+{% block content %}
+<h1>{{ profile.username }}'s Feed</h1>
+
+<main>
+
+  {% for post in posts %}
+
+    <article>
+      <img src="{{ post.profile.profile_image_url }}" alt="" width="50">
+      <h3>{{ post.profile.username }}</h3>
+      <p>{{ post.caption }}</p>
+      <p>Posted at {{ post.timestamp }}</p>
+      <p>{{ post.get_likes.count }} Likes</p>
+
+      {% for photo in post.get_all_photos %}
+        {% if forloop.first %}
+          <img src="{{ photo.get_image_url }}" alt="" width="300">
+        {% endif %}
+      {% empty %}
+        <img src="/static/no-image.png" alt="no image" width="300">
+      {% endfor %}
+
+      <h4>Comments:</h4>
+      {% for comment in post.get_all_comments %}
+        <p>{{ comment.profile.username }}: {{ comment.text }}</p>
+      {% empty %}
+        <p>No comments yet.</p>
+      {% endfor %}
+
+    </article>
+
+    <hr>
+
+  {% empty %}
+    <p>No posts to show. Try following some profiles!</p>
+  {% endfor %}
+
+</main>
+{% endblock %}

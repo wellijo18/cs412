@@ -47,6 +47,16 @@ class Profile(models.Model):
   def get_num_posts(self):
     '''return the number of posts this profile has'''
     return len(self.get_all_posts())
+  def get_post_feed(self):
+    '''return the list of posts from profiles that profile follows'''
+    following = self.get_following()
+    posts = []
+    for profile in following:
+        profile_posts = profile.get_all_posts()
+        for post in profile_posts:
+            posts.append(post)
+    posts = sorted(posts, key=lambda post: post.timestamp, reverse=True)
+    return posts
 
 class Post(models.Model):
   '''Encapsulate the idea of a comment about an Post'''
