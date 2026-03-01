@@ -4,6 +4,7 @@
 {% block content %}
 <h1>{{ profile.display_name }}</h1>
 
+
 <main class="single-profile-container">
 
   <article>
@@ -11,6 +12,11 @@
     <div>
       <h2>{{ profile.display_name }}</h2>
       <h3>@ {{ profile.username }}</h3>
+      <p>
+        <a href="{% url 'update_profile' profile.pk %}">
+          Edit Profile
+        </a>
+      </p>
       <p>{{ profile.bio_text }}</p>
       <p>Joined on {{ profile.join_date }}</p>
       <p>0 Followers</p>
@@ -38,7 +44,7 @@
         {% for photo in post.get_all_photos %}
           {% if forloop.first %}
           <a href="{% url 'post' post.pk %}">
-            <img src="{{ photo.image_url }}" alt="" width="150">
+            <img src="{{ photo.get_image_url }}" alt="" width="150">
           </a>
           {% endif %}
         {% empty %}

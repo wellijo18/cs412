@@ -22,5 +22,10 @@
     <img src="/static/no-image.png" alt="no image">
   {% endfor %}
 
+  <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+    <a href="{% url 'update_post' post.pk %}">Update this Post</a>
+    <a href="{% url 'delete_post' post.pk %}">Delete this Post</a>
+  </div>
+
 </main>
 {% endblock %}

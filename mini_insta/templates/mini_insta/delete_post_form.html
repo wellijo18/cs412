@@ -1,0 +1,20 @@
+{% extends 'mini_insta/base.html' %}
+
+<!-- mini_insta/delete_post_form.html -->
+{% block content %}
+<h1>Delete Post by {{profile.username}}</h1>
+
+<p>Are you sure you want to delete the post: {{post.caption}}?</p>
+
+<!-- go thorugh with delte-->
+<form method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, Delete">
+</form>
+
+<!-- cancel the delete -->
+<form method="GET" action="{% url 'profile' profile.pk %}">
+  <input type="submit" value="Cancel">
+</form>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'mini_insta/base.html' %}
+
+<!-- mini_insta/update_profile_form.html -->
+{% block content %}
+
+<h1>Update Profile for {{ object.username }}</h1>
+
+<form method="POST">
+  {% csrf_token %}
+
+  <table>
+    <tr>
+      <th>{{ form.username.label }}</th>
+      <td>{{ form.username }}</td>
+    </tr>
+
+    <tr>
+      <th>{{ form.display_name.label }}</th>
+      <td>{{ form.display_name }}</td>
+    </tr>
+
+    <tr>
+      <th>{{ form.profile_image_url.label }}</th>
+      <td>{{ form.profile_image_url }}</td>
+    </tr>
+
+    <tr>
+      <th>{{ form.bio_text.label }}</th>
+      <td>{{ form.bio_text }}</td>
+    </tr>
+  </table>
+
+  <input type="submit" value="Save Changes">
+  <a href="{% url 'profile' object.pk %}">Cancel</a>
+
+</form>
+
+{% endblock %}

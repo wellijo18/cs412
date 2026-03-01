@@ -1,0 +1,23 @@
+{% extends 'mini_insta/base.html' %}
+
+<!-- mini_insta/update_post_form.html -->
+{% block content %}
+
+<h1>Update Post by {{ post.profile.username }}</h1>
+
+<form method="POST">
+  {% csrf_token %}
+
+  <table>
+    <tr>
+      <th>{{ form.caption.label }}</th>
+      <td>{{ form.caption }}</td>
+    </tr>
+  </table>
+
+  <input type="submit" value="Save Changes">
+  <a href="{% url 'post' post.pk %}">Cancel</a>
+
+</form>
+
+{% endblock %}

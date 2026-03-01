@@ -18,6 +18,10 @@ class Profile(models.Model):
   def __str__(self):
     '''return a string representation of this model'''
     return f'{self.display_name} account created by {self.username}'
+  
+  def get_absolute_url(self):
+    '''return to the profile'''
+    return f"/mini_insta/profile/{self.pk}"
 
 class Post(models.Model):
   '''Encapsulate the idea of a comment about an Post'''

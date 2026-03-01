@@ -1,9 +1,9 @@
 #mini_insta/views.py
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Profile, Post, Photo
 from django.urls import reverse
-from .forms import CreatePostForm
+from .forms import CreatePostForm, UpdateProfileForm
 import random
 # Create your views here.
 # create listview for show all page
@@ -62,3 +62,46 @@ class CreatePostView(CreateView):
         Photo.objects.create(post=self.object, image_file=file)
 
     return super().form_valid(form)
+
+
+class UpdateProfileView(UpdateView):
+  '''view to update a profile'''
+
+  model = Profile
+  form_class = UpdateProfileForm
+  template_name = 'mini_insta/update_profile_form.html'
+  context_object_name = 'profile'
+
+  def get_success_url(self):
+    return reverse('profile', kwargs={'pk': self.object.pk})
+
+class DeletePostView(DeleteView):
+  '''view to delete a post'''
+
+  model = Post
+  template_name = 'mini_insta/delete_post_form.html'
+  context_object_name = 'post'
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+
+    post = self.object
+    profile = post.profile
+
+    context['post'] = post
+    context['profile'] = profile
+    return context
+
+  def get_success_url(self):
+    return reverse('profile', kwargs={'pk': self.object.profile.pk})
+
+class UpdatePostView(UpdateView):
+  '''view to update a post'''
+
+  model = Post
+  form_class = CreatePostForm
+  template_name = 'mini_insta/update_post_form.html'
+  context_object_name = 'post'
+
+  def get_success_url(self):
+    return reverse('post', kwargs={'pk': self.object.pk})
