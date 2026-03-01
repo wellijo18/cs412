@@ -4,16 +4,18 @@
 {% block content %}
 <!-- create new post through form -->
 <h1> Create a new Post for {{profile.username}} </h1>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <table>
     {{form}}
   </table>
+
+  <!-- upload image(s) -->
+  <input type="file" name="images" multiple>
+
   <!-- optin to submit or cancel post creation -->
   <input type="submit" name="submit" value="Submit">
   <a href="{% url 'profile' profile.pk %}">Cancel</a>
 
 </form>
-
-
 {% endblock %}

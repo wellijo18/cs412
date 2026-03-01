@@ -36,12 +36,25 @@ class Post(models.Model):
     return photos
 
 class Photo(models.Model):
-  '''Encapsulate the idea of a comment about an Photo'''
+  '''Encapsulate the Photo attached to comment'''
 
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
   image_url = models.URLField(blank=True)
+  image_file= models.ImageField(blank=True)
   timestamp=models.DateTimeField(auto_now=True)
 
   def __str__(self):
     '''return a string representation of this Post'''
-    return f'{self.image_url} attached to post'
+    if self.image_url:
+      return f'{self.image_url} attached to post'
+    elif self.image_file:
+      return f'{self.image_file.url} attached to post'
+    else:
+      return "No image attached"
+  
+  def get_image_url(self):
+    if self.image_url:
+      return self.image_url
+    elif self.image_file:
+      return self.image_file.url
+    return ""

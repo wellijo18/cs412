@@ -19,13 +19,14 @@ class ProfileDetailView(DetailView):
   model = Profile
   template_name='mini_insta/show_profile.html'
   context_object_name = 'profile'
-
+# create single post view page when post done being created or clicked on
 class PostDetailView(DetailView):
   '''Display a single article.'''
   model = Post
   template_name='mini_insta/show_post.html'
   context_object_name = 'post'
 
+# used for creation of post
 class CreatePostView(CreateView):
   '''a view to handle the creation of a new post'''
 
@@ -34,7 +35,7 @@ class CreatePostView(CreateView):
   def get_success_url(self):
     pk = self.kwargs['pk']
     return reverse('post', kwargs={'pk': self.object.pk})
-
+  # used for passing context cariables
   def get_context_data(self, **kwargs):
     '''return the dictionary of context variables'''
     context = super().get_context_data(**kwargs)
@@ -45,12 +46,19 @@ class CreatePostView(CreateView):
     context['profile'] = profile
     return context
 
-  def form_valid(self,form):
+  def form_valid(self, form):
+    # attach post to profile
     pk = self.kwargs['pk']
     form.instance.profile_id = pk
-    self.object = form.save()
-    image_url = form.cleaned_data.get('image_url')
 
-    if image_url:
-        Photo.objects.create(post=self.object, image_url=image_url)
+    # save post
+    self.object = form.save()
+
+    # get uploaded files
+    files = self.request.FILES.getlist('images')
+
+    # create Photo objects
+    for file in files:
+        Photo.objects.create(post=self.object, image_file=file)
+
     return super().form_valid(form)
