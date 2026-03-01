@@ -3,11 +3,11 @@
 <!-- mini_insta/update_profile_form.html -->
 {% block content %}
 
-<h1>Update Profile for {{ object.username }}</h1>
+<h1>Update Profile info for {{ object.username }}</h1>
 
 <form method="POST">
   {% csrf_token %}
-
+  <!-- table to keep code organized with profile information -->
   <table>
     <tr>
       <th>{{ form.username.label }}</th>

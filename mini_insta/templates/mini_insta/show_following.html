@@ -3,12 +3,12 @@
 
 {% block content %}
 <h1>{{ profile.username }} is following</h1>
-
+  <!-- loop to show all following -->
 <main>
   {% for following in profile.get_following %}
     <p><a href="{% url 'profile' following.pk %}">{{ following.username }}</a></p>
   {% empty %}
-    <p>Not following anyone yet.</p>
+    <p>Follows no one</p>
   {% endfor %}
 </main>
 {% endblock %}

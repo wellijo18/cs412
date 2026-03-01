@@ -9,10 +9,11 @@
   {% for post in posts %}
 
     <article>
+      <!-- all post infomration from followed user -->
       <img src="{{ post.profile.profile_image_url }}" alt="" width="50">
-      <h3>{{ post.profile.username }}</h3>
+      <h1>{{ post.profile.username }}</h1>
       <p>{{ post.caption }}</p>
-      <p>Posted at {{ post.timestamp }}</p>
+      <!-- used count to return number intead of the set -->
       <p>{{ post.get_likes.count }} Likes</p>
 
       {% for photo in post.get_all_photos %}
@@ -22,20 +23,20 @@
       {% empty %}
         <img src="/static/no-image.png" alt="no image" width="300">
       {% endfor %}
-
-      <h4>Comments:</h4>
+      <!-- display comments for posts -->
+      <h2>Comments:</h2>
       {% for comment in post.get_all_comments %}
         <p>{{ comment.profile.username }}: {{ comment.text }}</p>
       {% empty %}
-        <p>No comments yet.</p>
+        <p>No comments</p>
       {% endfor %}
 
     </article>
 
     <hr>
-
+    <!-- if no posts -->
   {% empty %}
-    <p>No posts to show. Try following some profiles!</p>
+    <p>No posts, Follow profiles for posts</p>
   {% endfor %}
 
 </main>

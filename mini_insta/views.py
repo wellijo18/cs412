@@ -40,7 +40,7 @@ class CreatePostView(CreateView):
     '''return the dictionary of context variables'''
     context = super().get_context_data(**kwargs)
 
-    #find and add the post to context data
+    #find and add the post to context
     pk = self.kwargs['pk']
     profile = Profile.objects.get(pk=pk)
     context['profile'] = profile
@@ -56,8 +56,7 @@ class CreatePostView(CreateView):
 
     # get uploaded files
     files = self.request.FILES.getlist('images')
-
-    # create Photo objects
+    # create Photo obj
     for file in files:
         Photo.objects.create(post=self.object, image_file=file)
 
@@ -161,10 +160,15 @@ class SearchView(ListView):
     profile = Profile.objects.get(pk=pk)
     query = self.request.GET.get('query')
     posts = Post.objects.filter(caption__icontains=query)
-    profiles = Profile.objects.filter(username__icontains=query) | Profile.objects.filter(display_name__icontains=query) | Profile.objects.filter(bio_text__icontains=query)
+    all_profiles = Profile.objects.all()
+    matching_profiles = []
+    for p in all_profiles:
+      if query.lower() in p.username.lower() or query.lower() in p.display_name.lower() or query.lower() in p.bio_text.lower():
+        matching_profiles.append(p)
+
     context['profile'] = profile
     context['query'] = query
     context['posts'] = posts
-    context['profiles'] = profiles
+    context['profiles'] = matching_profiles
 
     return context

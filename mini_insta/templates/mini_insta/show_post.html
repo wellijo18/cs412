@@ -7,6 +7,7 @@
 <main class="single-post-container">
 
   <article>
+    <!-- Show da post info -->
     <div>
       <p>{{ post.get_likes.count }} Likes</p>
       <h2>{{ post.caption }}</h2>
@@ -16,7 +17,7 @@
 
   <hr>
 
-  <!-- Display photos for this post -->
+  <!-- show photos for this post -->
   {% for photo in post.get_all_photos %}
     <img src="{{ photo.get_image_url }}" alt="">
   {% empty %}
@@ -25,15 +26,15 @@
 
   <hr>
 
-  <!-- Display comments for this post -->
+  <!-- show comments for this post -->
   <h2>Comments:</h2>
   {% for comment in post.get_all_comments %}
-    <p><strong>{{ comment.profile.username }}</strong>: {{ comment.text }}</p>
+    <p>{{ comment.profile.username }}: {{ comment.text }}</p>
     <p>{{ comment.timestamp }}</p>
   {% empty %}
     <p>No comments yet.</p>
   {% endfor %}
-
+  <!-- optons to make changes to post -->
   <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
     <a href="{% url 'update_post' post.pk %}">Update this Post</a>
     <a href="{% url 'delete_post' post.pk %}">Delete this Post</a>

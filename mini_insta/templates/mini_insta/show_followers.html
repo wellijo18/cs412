@@ -3,12 +3,13 @@
 
 {% block content %}
 <h1>Followers of {{ profile.username }}</h1>
+  <!-- loop to show all followers -->
 
 <main>
   {% for follower in profile.get_followers %}
     <p><a href="{% url 'profile' follower.pk %}">{{ follower.username }}</a></p>
   {% empty %}
-    <p>No followers yet.</p>
+    <p>No followers</p>
   {% endfor %}
 </main>
 {% endblock %}
