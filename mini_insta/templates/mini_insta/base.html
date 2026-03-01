@@ -17,6 +17,7 @@
         <li><a href="{% url 'show_all_profiles' %}">Show All</a></li>
         {% if profile %}
         <li><a href="{% url 'create_post' profile.pk %}">Create Post</a></li>
+        <li><a href="{% url 'search' profile.pk %}">Search</a></li>
         {% endif %}
       </ul>
     </nav>
