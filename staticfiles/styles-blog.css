@@ -390,3 +390,24 @@ main {
     text-align: center;
   }
 }
+
+form.logout-form {
+  all: unset;
+  display: inline;
+}
+
+form.logout-form button {
+  all: unset;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+form.logout-form button:hover {
+  color: var(--white);
+  background: rgba(59, 130, 246, 0.12);
+}
