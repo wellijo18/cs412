@@ -9,14 +9,11 @@
   {% csrf_token %}
   <!-- update/change post info -->
   <table>
-    <tr>
-      <th>{{ form.caption.label }}</th>
-      <td>{{ form.caption }}</td>
-    </tr>
+    {{ form }}
   </table>
 
   <input type="submit" value="Save Changes">
-  <a href="{% url 'post' post.pk %}">Cancel</a>
+  <a href="{% url 'my_profile' %}">Cancel</a>
 
 </form>
 

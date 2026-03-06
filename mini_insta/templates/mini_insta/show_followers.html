@@ -6,6 +6,7 @@
   <!-- loop to show all followers -->
 
 <main>
+  <!-- show through looping showing da followed users -->
   {% for follower in profile.get_followers %}
     <p><a href="{% url 'profile' follower.pk %}">{{ follower.username }}</a></p>
   {% empty %}

@@ -3,6 +3,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Article, Comment
 from .forms import CreateArticleForm, CreateCommentForm, UpdateArticleForm
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 import random
 # Create your views here.
 
@@ -11,6 +14,17 @@ class ShowAllView(ListView):
   model = Article
   template_name = "blog/show_all.html"
   context_object_name = "articles"
+  def dispatch(self, request, *args, **kwargs):
+        '''Override the dispatch method to add debugging information.'''
+ 
+ 
+        if request.user.is_authenticated:
+            print(f'ShowAllView.dispatch(): request.user={request.user}')
+        else:
+            print(f'ShowAllView.dispatch(): not logged in.')
+ 
+ 
+        return super().dispatch(request, *args, **kwargs)
 
 class ArticleView(DetailView):
   '''Display a single article.'''
@@ -31,13 +45,20 @@ class RandomArticleView(DetailView):
     return article
 
 
-class CreateArticleView(CreateView):
+class CreateArticleView(LoginRequiredMixin, CreateView):
   '''a view to handle the creation of a new article'''
   form_class = CreateArticleForm
   template_name = 'blog/create_article_form.html'
 
+  def get_login_url(self):
+    return reverse('login')
+
   def form_valid(self, form):
     print(f'CreateArticleView.form_Valid(): {form.cleaned_data}')
+    user = self.request.user
+    print(f'CreateArticleView.form_Valid(): {user}')
+
+    form.instance.user = user
     return super().form_valid(form)
 
 
@@ -84,3 +105,11 @@ class DeleteCommentView(DeleteView):
     comment = Comment.objects.get(pk=pk)
     article = comment.article
     return reverse('article', kwargs={'pk':article.pk})
+
+class UserRegistrationView(CreateView):
+  template_name= 'blog/register.html'
+  form_class = UserCreationForm
+  model = User
+
+  def get_success_url(self):
+    return reverse('login')

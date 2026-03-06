@@ -5,19 +5,40 @@
     <h1>Mini Insta</h1>
     <link rel="stylesheet" href="{% static 'styles-blog.css' %}">
   </head>
+
   <!-- content from pages that will extend off of base -->
   <body>
+
+    {% if request.user.is_authenticated %}
+    Logged in as: {{request.user}}
+    {% else %}
+    Not logged in
+    {% endif %}
+
     {% block content %}
     {% endblock %}
   </body>
+
   <footer>
     <!-- nav to go back to see all profiles -->
     <nav>
       <ul>
         <li><a href="{% url 'show_all_profiles' %}">Show All</a></li>
-        {% if profile %}
-        <li><a href="{% url 'create_post' profile.pk %}">Create Post</a></li>
-        <li><a href="{% url 'search' profile.pk %}">Search</a></li>
+
+        {% if request.user.is_authenticated %}
+        <!-- if user has acc -->
+          <li><a href="{% url 'my_profile' %}">My Profile</a></li>
+          <li><a href="{% url 'create_post' %}">Create Post</a></li>
+          <li>
+            <form method="POST" action="{% url 'logout' %}" class="logout-form">
+              {% csrf_token %}
+              <button type="submit">Log out</button>
+            </form>
+          </li>
+        {% else %}
+          <!-- user not logged in or no acc -->
+          <li><a href="{% url 'login' %}">Log in</a></li>
+          <li><a href="{% url 'create_profile' %}">Create Profile</a></li>
         {% endif %}
       </ul>
     </nav>

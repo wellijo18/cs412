@@ -4,7 +4,8 @@ from . import views
 from .views import *
 #  ShowAllView, ArticleView, RandomArticleView
 
-
+# genertic view for login stuff / authentication
+from django.contrib.auth import views as auth_views
 urlpatterns = [
   # path(r'', views.home, name="home"),
 
@@ -15,6 +16,10 @@ urlpatterns = [
   path('article/<int:pk>/create_comment', CreateCommentView.as_view(), name='create_comment'),
   path('article/<int:pk>/update', UpdateArticleView.as_view(), name='update_article'),
   path('comment/<int:pk>/delete', DeleteCommentView.as_view(), name='delete_comment'),
+  # authorization related urls
+  path('login/', auth_views.LoginView.as_view(template_name= "blog/login.html"), name='login'),
+  path('logout/', auth_views.LogoutView.as_view(next_page='show_all'), name='logout'),
+  path('register/', UserRegistrationView.as_view(), name='register'),
   
 
 ]

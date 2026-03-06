@@ -4,7 +4,6 @@
 {% block content %}
 <h1>{{ profile.display_name }}</h1>
 
-
 <main class="single-profile-container">
 
   <article>
@@ -12,36 +11,48 @@
     <div>
       <h2>{{ profile.display_name }}</h2>
       <h3>@ {{ profile.username }}</h3>
-      <p>
-        <a href="{% url 'update_profile' profile.pk %}">
-          Edit Profile
-        </a>
-      </p>
+      {% if request.user.is_authenticated and request.user == profile.user %}
+        <p>
+          <a href="{% url 'update_profile' %}">Edit Profile</a>
+        </p>
+      {% endif %}
+      {% if request.user.is_authenticated and request.user == profile.user %}
+        <p>
+          <a href="{% url 'show_postfeed' %}">My Feed</a>
+        </p>
+      {% endif %}
       <p>{{ profile.bio_text }}</p>
       <p>Joined on {{ profile.join_date }}</p>
-      <!-- get new made models info like follwers, following and num posts now dynamic -->
+      <!-- show follower/following info -->
       <p><a href="{% url 'show_followers' profile.pk %}">{{ profile.get_num_followers }} Followers</a></p>
       <p><a href="{% url 'show_following' profile.pk %}">{{ profile.get_num_following }} Following</a></p>
       <p>{{ profile.get_num_posts }} Posts</p>
+
+      {% if request.user.is_authenticated and request.user != profile.user %}
+        {% if my_profile in profile.get_followers %}
+        <!-- for following and unfollwoing  -->
+          <p><a href="{% url 'remove_follow_profile' profile.pk %}">Unfollow</a></p>
+        {% else %}
+          <p><a href="{% url 'follow_profile' profile.pk %}">Follow</a></p>
+        {% endif %}
+      {% endif %}
+
     </div>
 
     <img src="{{ profile.profile_image_url }}" alt="">
   </article>
-<!-- display post if profile has any -->
+
   <hr>
   <h2>Posts:</h2>
   <table>
     {% for post in profile.get_all_posts %}
     <tr>
-
       <td>
         <a href="{% url 'post' post.pk %}">
           {{ post.caption }}
         </a>
       </td>
-
       <td>
-        <!-- attach image if there is, no image if there isnt -->
         {% for photo in post.get_all_photos %}
           {% if forloop.first %}
           <a href="{% url 'post' post.pk %}">
@@ -54,10 +65,8 @@
         </a>
         {% endfor %}
       </td>
-
     </tr>
     {% endfor %}
-
   </table>
 
 </main>

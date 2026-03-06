@@ -1,9 +1,11 @@
 # mini_insta/models.py
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model):
   '''encapsulate the data of a blog article by an author'''
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
   username=models.TextField(blank=True)
   display_name=models.TextField(blank=True)
   profile_image_url = models.URLField(blank=True)
@@ -101,6 +103,7 @@ class Photo(models.Model):
       return "No image attached"
   
   def get_image_url(self):
+    '''for grabbing umage url for database'''
     if self.image_url:
       return self.image_url
     elif self.image_file:
@@ -108,15 +111,13 @@ class Photo(models.Model):
     return ""
 
 class Follow(models.Model):
-
   '''Encapsulate the follow between two profiles'''
-
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="profile")
   follower_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="follower_profile")
   timestamp = models.DateTimeField(auto_now=True)
 
   def __str__(self):
-    '''return a string representation of this Follow'''
+    '''return a string representation of Follow'''
     return f'{self.follower_profile.username} follows {self.profile.username}'
 
 class Comment(models.Model):
@@ -127,16 +128,15 @@ class Comment(models.Model):
   timestamp = models.DateTimeField(auto_now=True)
   text = models.TextField(blank=False)
   def __str__(self):
-    '''return a string representation of this Comment'''
+    '''return a string representation of Comment'''
     return f'{self.profile.username} commented on {self.post.caption}'
 
 class Like(models.Model):
   '''Encapsulate like on a post'''
-
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   timestamp = models.DateTimeField(auto_now=True)
 
   def __str__(self):
-    '''return a string representation of this Like'''
+    '''return a string representation of Like'''
     return f'{self.profile.username} liked {self.post.caption}'

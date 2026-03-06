@@ -1,0 +1,52 @@
+<!-- mini_insta/create_profile_form.html -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Create a Profile</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <!-- form inspird bu update profile and taking stuff from django with our created model info -->
+  <h2>Account Info</h2>
+  <table>
+    <tr>
+      <th>{{ user_form.username.label }}</th>
+      <td>{{ user_form.username }}</td>
+    </tr>
+    <tr>
+      <th>{{ user_form.password1.label }}</th>
+      <td>{{ user_form.password1 }}</td>
+    </tr>
+    <tr>
+      <th>{{ user_form.password2.label }}</th>
+      <td>{{ user_form.password2 }}</td>
+    </tr>
+  </table>
+  <!-- for da model -->
+  <h2>Profile Info</h2>
+  <table>
+    <tr>
+      <th>{{ form.username.label }}</th>
+      <td>{{ form.username }}</td>
+    </tr>
+    <tr>
+      <th>{{ form.display_name.label }}</th>
+      <td>{{ form.display_name }}</td>
+    </tr>
+    <tr>
+      <th>{{ form.profile_image_url.label }}</th>
+      <td>{{ form.profile_image_url }}</td>
+    </tr>
+    <tr>
+      <th>{{ form.bio_text.label }}</th>
+      <td>{{ form.bio_text }}</td>
+    </tr>
+  </table>
+
+  <input type="submit" value="Create Profile">
+  <a href="{% url 'show_all_profiles' %}">Cancel</a>
+
+</form>
+
+{% endblock %}

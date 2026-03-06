@@ -5,6 +5,7 @@
 <h1>{{ profile.username }} is following</h1>
   <!-- loop to show all following -->
 <main>
+  <!-- show through looping showing da following users -->
   {% for following in profile.get_following %}
     <p><a href="{% url 'profile' following.pk %}">{{ following.username }}</a></p>
   {% empty %}
