@@ -1,0 +1,57 @@
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <h1>Voter Records</h1>
+    <!-- bring up the serach stuff -->
+    <div class="row">
+        {% include "voter_analytics/search.html" %}
+    </div>
+
+    <div class="row">
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}&party={{ selected_party }}&min_dob={{ selected_min_dob }}&max_dob={{ selected_max_dob }}&voter_score={{ selected_voter_score }}{% if selected_v20state %}&v20state=on{% endif %}{% if selected_v21town %}&v21town=on{% endif %}{% if selected_v21primary %}&v21primary=on{% endif %}{% if selected_v22general %}&v22general=on{% endif %}{% if selected_v23town %}&v23town=on{% endif %}">Previous</a></span>
+                </li>
+            {% endif %}
+                <li>
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}&party={{ selected_party }}&min_dob={{ selected_min_dob }}&max_dob={{ selected_max_dob }}&voter_score={{ selected_voter_score }}{% if selected_v20state %}&v20state=on{% endif %}{% if selected_v21town %}&v21town=on{% endif %}{% if selected_v21primary %}&v21primary=on{% endif %}{% if selected_v22general %}&v22general=on{% endif %}{% if selected_v23town %}&v23town=on{% endif %}">Next</a></span>
+                </li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+    <!-- voter info  -->
+    <div class="row">
+        <table class="voter-table">
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Date of Birth</th>
+                <th>Party</th>
+                <th>Voter Score</th>
+            </tr>
+
+            {% for v in voters %}
+            <tr>
+                <td>
+                    <a href="{% url 'voter' v.pk %}">{{ v.da_first_name }} {{ v.da_last_name }}</a>
+                </td>
+                <td>{{ v.da_street_number }} {{ v.da_street_name }}</td>
+                <td>{{ v.da_dob }}</td>
+                <td>{{ v.da_party }}</td>
+                <td>{{ v.da_voter_score }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+{% endblock %}

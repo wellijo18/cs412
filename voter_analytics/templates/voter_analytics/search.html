@@ -1,0 +1,109 @@
+<!-- voter_analytics/templates/voter_analytics/search.html -->
+<table>
+  <form method="GET" action="{% url 'voters' %}">
+      <!-- filter for searching -->
+      <tr>
+          <th>Min Date of Birth Year:</th>
+          <td>
+              <select name="min_dob">
+                  <option value="">Select</option>
+                  {% for y in years %}
+                      {% if selected_min_dob == y|stringformat:"s" %}
+                          <option value="{{ y }}" selected>{{ y }}</option>
+                      {% else %}
+                          <option value="{{ y }}">{{y }}</option>
+                      {% endif %}
+                  {% endfor %}
+              </select>
+          </td>
+      </tr>
+  
+      <tr>
+          <th>Max Date of Birth Year:</th>
+          <td>
+              <select name="max_dob">
+                  <option value="">Select</option>
+                  {% for y in years %}
+                      {% if selected_max_dob == y|stringformat:"s" %}
+                          <option value="{{ y }}" selected>{{y }}</option>
+                      {% else %}
+                          <option value="{{ y }}">{{ y }}</option>
+                      {% endif %}
+                  {% endfor %}
+              </select>
+          </td>
+      </tr>
+  
+      <tr>
+          <th>Party:</th>
+          <td>
+              <select name="party">
+                  <option value="">Select</option>
+                  {% for p in parties %}
+                      {% if selected_party == p %}
+                          <option value="{{ p }}" selected>{{ p }}</option>
+                      {% else %}
+                          <option value="{{ p }}">{{ p }}</option>
+                      {% endif %}
+                  {% endfor %}
+              </select>
+          </td>
+      </tr>
+  
+      <tr>
+          <th>Voter Score:</th>
+          <td>
+              <select name="voter_score">
+                  <option value="">Select</option>
+                  {% for s in "012345" %}
+                      {% if selected_voter_score == s %}
+                          <option value="{{ s }}" selected>{{ s }}</option>
+                      {% else %}
+                          <option value="{{ s }}">{{s }}</option>
+                      {% endif %}
+                  {% endfor %}
+              </select>
+          </td>
+      </tr>
+  
+      <tr>
+          <th>Elections Voted In:</th>
+          <td>
+              {% if selected_v20state %}
+                  <input type="checkbox" name="v20state" checked> 2020 State
+              {% else %}
+                  <input type="checkbox" name="v20state"> 2020 State
+              {% endif %}
+              {% if selected_v21town %}
+                  <input type="checkbox" name="v21town" checked> 2021 Town
+              {% else %}
+                  <input type="checkbox" name="v21town"> 2021 Town
+              {% endif %}
+
+              {% if selected_v21primary %}
+                  <input type="checkbox" name="v21primary" checked> 2021 Primary
+              {% else %}
+                  <input type="checkbox" name="v21primary"> 2021 Primary
+              {% endif %}
+
+              {% if selected_v22general %}
+                  <input type="checkbox" name="v22general" checked> 2022 General
+              {% else %}
+                  <input type="checkbox" name="v22general"> 2022 General
+              {% endif %}
+              {% if selected_v23town %}
+                  <input type="checkbox" name="v23town" checked> 2023 Town
+              {% else %}
+                  <input type="checkbox" name="v23town"> 2023 Town
+              {% endif %}
+          </td>
+      </tr>
+        <!-- to process the filter -->
+
+      <tr>
+          <td><button type="submit" class="filter-btn">Filter</button></td>
+          <td><a href="{% url 'voters' %}">Clear</a></td>
+      </tr>
+  
+  </form>
+</table>

@@ -1,0 +1,79 @@
+<!-- voter_analytics/templates/voter_analytics/results_detail.html -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<div class="container">
+    <!-- single voter info -->
+    <h1>{{ v.da_first_name }} {{ v.da_last_name }}</h1>
+
+    <br><br>
+
+    <table>
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td>{{ v.da_first_name }}</td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>{{ v.da_last_name }}</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>{{ v.da_street_number }} {{ v.da_street_name }}{% if v.da_apt_number %}, Apt {{ v.da_apt_number }}{% endif %}       </td>
+            <br>
+            <td><a href="https://www.google.com/maps/search/?api=1&query={{ v.da_street_number }}+{{ v.da_street_name }}+{{ v.da_zip_code }}" target="_blank">----- See on Google Maps</a></td>
+        </tr>
+        <tr>
+            <td>Zip Code</td>
+            <td>{{ v.da_zip_code }}</td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td>{{ v.da_dob }}</td>
+        </tr>
+        <tr>
+            <td>Date of Registration</td>
+            <td>{{ v.da_date_registered }}</td>
+        </tr>
+        <tr>
+            <td>Party</td>
+            <td>{{ v.da_party }}</td>
+        </tr>
+        <tr>
+            <td>Precinct</td>
+            <td>{{ v.da_precinct }}</td>
+        </tr>
+        <tr>
+            <td>Voter Score</td>
+            <td>{{ v.da_voter_score }}</td>
+        </tr>
+        <tr>
+            <td>2020 State Election</td>
+            <td>{{ v.da_v20state }}</td>
+        </tr>
+        <tr>
+            <td>2021 Town Election</td>
+            <td>{{ v.da_v21town }}</td>
+        </tr>
+        <tr>
+            <td>2021 Primary</td>
+            <td>{{ v.da_v21primary }}</td>
+        </tr>
+        <tr>
+            <td>2022 General Election</td>
+            <td>{{ v.da_v22general }}</td>
+        </tr>
+        <tr>
+            <td>2023 Town Election</td>
+            <td>{{ v.da_v23town }}</td>
+        </tr>
+    </table>
+
+
+</div>
+{% endblock %}
