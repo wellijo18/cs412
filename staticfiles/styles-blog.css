@@ -34,150 +34,135 @@ h1, h2, h3 {
   letter-spacing: -0.5px;
 }
 
-header {
+nav {
   position: sticky;
   top: 0;
   background: rgba(7, 15, 31, 0.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
-  padding: 1rem;
-  text-align: center;
+  padding: 1rem 1.5rem;
   z-index: 10;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+nav ul li a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+nav ul li a:hover {
+  color: var(--accent-soft);
+}
+
+body > *:not(nav):not(footer) {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
 }
 
 h1 {
   font-size: 2.2rem;
-  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1.5rem;
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--accent-soft);
 }
 
-.container form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  background: var(--card);
-  padding: 1.2rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+p {
+  color: var(--text);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.container form label {
-  font-size: 0.8rem;
+em {
   color: var(--muted);
+  font-size: 0.85rem;
+}
+
+ul {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 1rem;
 }
 
-select, input {
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.45rem 0.6rem;
-  color: var(--text);
-  font-size: 0.85rem;
-}
-
-select:focus, input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent-glow);
-}
-
-.filter-btn {
-  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-  border: none;
-  border-radius: 8px;
-  padding: 0.55rem 1.4rem;
-  font-size: 0.9rem;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.filter-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px var(--accent-glow);
-}
-
-table {
-  width: 100%;
-  margin-top: 1.5rem;
-  border-collapse: collapse;
+ul li {
   background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border);
+  padding: 1.2rem 1.5rem;
+  transition: background 0.15s;
 }
 
-th {
-  text-align: left;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 0.7rem 0.9rem;
-  background: rgba(255,255,255,0.03);
+ul li:hover {
+  background: rgba(59, 130, 246, 0.08);
 }
 
-td {
-  padding: 0.7rem 0.9rem;
+ul li a {
+  color: var(--accent-soft);
   font-size: 0.85rem;
+  text-decoration: none;
 }
 
-tr {
-  transition: 0.15s;
+ul li a:hover {
+  text-decoration: underline;
 }
 
-tr:hover {
-  background: rgba(59,130,246,0.08);
-}
-
-tr:not(:last-child) td {
-  border-bottom: 1px solid var(--border);
-}
-
-.pagination {
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.pagination a {
-  padding: 0.35rem 0.7rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  color: var(--muted);
+img {
+  max-width: 100%;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
-  transition: 0.2s;
+  margin: 1rem 0;
 }
 
-.pagination a:hover {
+a {
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+a:hover {
   color: white;
-  border-color: var(--accent);
-  background: rgba(59,130,246,0.1);
 }
 
-.pagination span {
-  font-size: 0.8rem;
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
   color: var(--muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
 }
 
 @media (max-width: 768px) {
-  .container form {
-    flex-direction: column;
+  nav ul {
+    gap: 1rem;
   }
 
-  table {
-    font-size: 0.75rem;
+  h1 {
+    font-size: 1.6rem;
   }
 
-  td, th {
-    padding: 0.5rem;
+  img {
+    max-width: 100%;
   }
 }

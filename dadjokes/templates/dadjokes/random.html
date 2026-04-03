@@ -1,0 +1,13 @@
+<!-- dadjokes/random.html -->
+{% extends 'dadjokes/base.html' %}
+{% block content %}
+  <h1>Random Dad Joke and Picture</h1>
+
+  <h2>Joke</h2>
+  <p>{{ joke.text }}</p>
+  <p>Added by {{ joke.name }}</p>
+
+  <h2>Picture</h2>
+  <img src="{{ picture.image_url }}" alt="funnny picture">
+  <p>Added by {{ picture.name }}</p>
+{% endblock %}

@@ -1,0 +1,8 @@
+<!-- dadjokes/joke.html -->
+{% extends 'dadjokes/base.html' %}
+{% block content %}
+  <h1>Dad Joke {{ joke.pk }}</h1>
+  <p>{{ joke.text }}</p>
+  <p>Added by {{ joke.name }}</p>
+  <a href="{% url 'jokes' %}">All jokes</a>
+{% endblock %}

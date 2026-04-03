@@ -1,0 +1,8 @@
+<!-- dadjokes/picture.html -->
+{% extends 'dadjokes/base.html' %}
+{% block content %}
+  <h1>Picture {{ picture.pk }}</h1>
+  <img src="{{ picture.image_url }}" alt="funnny picture">
+  <p>Added by {{ picture.name }}</p>
+  <a href="{% url 'pictures' %}">All pictures</a>
+{% endblock %}
