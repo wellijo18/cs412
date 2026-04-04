@@ -1,54 +1,60 @@
 # dadjokes/api/views.py
 
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework import generics
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import status
 from ..models import Joke, Picture
 from .serializers import JokeSerializer, PictureSerializer
 import random
 
 
-@method_decorator(csrf_exempt, name='dispatch')
-class JokeListAPIView(generics.ListCreateAPIView):
+@api_view(['GET', 'POST'])
+def JokeListAPIView(request):
     '''Return all Jokes'''
+    if request.method == 'GET':
+        return Response(JokeSerializer(Joke.objects.all(), many=True).data)
 
-    queryset = Joke.objects.all()
-    serializer_class = JokeSerializer
+    serializer = JokeSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class RandomJokeAPIView(APIView):
+
+@api_view(['GET'])
+def RandomJokeAPIView(request):
     '''Return one random Joke'''
-    def get(self, request):
-        joke = random.choice(Joke.objects.all())
-        serializer = JokeSerializer(joke)
 
-        return Response(serializer.data)
+    joke = random.choice(Joke.objects.all())
+    return Response(JokeSerializer(joke).data)
 
 
-class JokeDetailAPIView(generics.RetrieveAPIView):
-    '''Return one Joke by pk'''
-    queryset = Joke.objects.all()
-    serializer_class = JokeSerializer
+@api_view(['GET'])
+def JokeDetailAPIView(request, pk):
+    '''Return one joke by pk'''
+
+    joke = Joke.objects.get(pk=pk)
+    return Response(JokeSerializer(joke).data)
 
 
 
-class PictureDetailAPIView(generics.RetrieveAPIView):
-    '''Return one Picture by pk'''
-    queryset = Picture.objects.all()
-    serializer_class = PictureSerializer
-
-class PictureListAPIView(generics.ListAPIView):
-    '''Return all Pictures'''
-
-    queryset = Picture.objects.all()
-    serializer_class = PictureSerializer
+@api_view(['GET'])
+def PictureDetailAPIView(request, pk):
+    '''Return one picture by pk'''
+    picture = Picture.objects.get(pk=pk)
+    return Response(PictureSerializer(picture).data)
 
 
-class RandomPictureAPIView(APIView):
-    '''Return one random Picture'''
-    def get(self, request):
-        picture = random.choice(Picture.objects.all())
-        serializer = PictureSerializer(picture)
-        
-        return Response(serializer.data)
+@api_view(['GET'])
+def PictureListAPIView(request):
+    '''Return all pictures'''
+    return Response(PictureSerializer(Picture.objects.all(), many=True).data)
+
+
+
+@api_view(['GET'])
+def RandomPictureAPIView(request):
+    '''Return one random picture'''
+
+    picture = random.choice(Picture.objects.all())
+    return Response(PictureSerializer(picture).data)
