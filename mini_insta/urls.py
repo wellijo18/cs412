@@ -5,6 +5,7 @@ from . import views
 from .views import ProfileListView, ProfileDetailView, PostDetailView, CreatePostView, UpdateProfileView, DeletePostView, UpdatePostView, ShowFollowersDetailView, ShowFollowingDetailView, PostFeedListView, SearchView, DaProfileView, CreateProfileView, FollowProfileView, RemoveFollowProfileView, LikePostView, RemoveLikePostView
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
+from django.urls import path, include
 
 
 urlpatterns = [
@@ -28,4 +29,5 @@ urlpatterns = [
   path('profile/<int:pk>/remove_follow', RemoveFollowProfileView.as_view(), name='remove_follow_profile'),
   path('post/<int:pk>/like', LikePostView.as_view(), name='like_post'),
   path('post/<int:pk>/remove_like', RemoveLikePostView.as_view(), name='remove_like_post'),
+  path('api/', include('mini_insta.api.urls')),
 ]
