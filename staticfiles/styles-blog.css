@@ -8,29 +8,79 @@ body {
   background: linear-gradient(135deg, #061226, #102d63);
   color: #eaf2ff;
   font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.navbar {
+  width: 100%;
+  background: rgba(6, 18, 38, 0.95);
+  border-bottom: 1px solid #3b82f6;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links a,
+.nav-btn {
+  background: none;
+  border: none;
+  color: #eaf2ff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+}
+
+.nav-links a:hover,
+.nav-btn:hover {
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+.logout-form {
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
   font-size: 3rem;
-  margin: 0;
-  padding: 2rem 2rem 0.5rem 2rem;
+  margin: 0 0 1rem 0;
   color: white;
 }
 
 h2 {
   font-size: 2rem;
-  margin: 1.5rem auto 1rem auto;
+  margin: 1.5rem 0 1rem 0;
   color: #bfdbfe;
-  max-width: 1000px;
-  padding: 0 2rem;
 }
 
 h3 {
   font-size: 1.5rem;
-  margin: 1.5rem auto 1rem auto;
+  margin: 1.5rem 0 1rem 0;
   color: #dbeafe;
-  max-width: 1000px;
-  padding: 0 2rem;
 }
 
 h4 {
@@ -43,10 +93,14 @@ p {
   margin: 0.4rem 0;
 }
 
+main,
+.content,
+body > h1,
+body > h2,
+body > h3,
 body > p,
-body > a,
 body > form,
-body > div,
+body > div:not(.navbar),
 body > ul {
   max-width: 1000px;
   margin-left: auto;
@@ -64,41 +118,6 @@ a {
 a:hover {
   color: white;
   text-decoration: underline;
-}
-
-nav {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 0 2rem;
-}
-
-nav ul {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav li {
-  list-style: none;
-}
-
-nav a,
-nav button {
-  background: #1d4ed8;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 0.7rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-nav a:hover,
-nav button:hover {
-  background: #2563eb;
-  text-decoration: none;
 }
 
 form {
@@ -167,7 +186,7 @@ input[type="submit"]:hover {
   width: 100%;
   max-width: 1000px;
   margin: 1rem auto;
-  padding: 0 2rem;
+  padding: 0;
 }
 
 .review-card {
@@ -189,13 +208,173 @@ input[type="submit"]:hover {
   font-size: 1.1rem;
 }
 
+.page-card {
+  max-width: 650px !important;
+  margin: 3rem auto !important;
+  padding: 2rem !important;
+  background: #102a52;
+  border: 1px solid #3b82f6;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.page-card h2 {
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.page-card p {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.button-link {
+  display: inline-block;
+  margin-top: 1rem;
+  background: #2563eb;
+  color: white;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  text-decoration: none;
+}
+
+.button-link:hover {
+  background: #3b82f6;
+  text-decoration: none;
+}
+
+.car-detail-page {
+  max-width: 900px;
+  margin: 2.5rem auto;
+  padding: 0 2rem;
+}
+
+.plate-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border-bottom: 1px solid #3b82f6;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.plate-display h2 {
+  margin: 0;
+  font-size: 2.4rem;
+  color: white;
+}
+
+.plate-state {
+  color: #bfdbfe;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.car-details-list {
+  margin-top: 1.5rem;
+  background: rgba(16, 42, 82, 0.8);
+  border: 1px solid #3b82f6;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.car-details-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.car-details-list div:last-child {
+  border-bottom: none;
+}
+
+.car-details-list span {
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+.car-details-list p {
+  color: white;
+  margin: 0;
+}
+
 hr {
   border: none;
   border-top: 1px solid #3b82f6;
   margin: 1.5rem 0;
 }
 
-footer {
-  max-width: 1000px;
-  margin: 2rem auto;
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-row label {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.login-form input {
+  width: 100%;
+}
+
+.login-form button {
+  margin-top: 0.5rem;
+  align-self: center;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .logo {
+    font-size: 2.4rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  .nav-links {
+    gap: 1.2rem;
+  }
+
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+  }
+
+  .plate-display {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .car-details-list div {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
 }

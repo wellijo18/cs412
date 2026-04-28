@@ -7,39 +7,28 @@
 
   <body>
 
-    <div class="header">
-      <h1>Rate The Plate</h1>
-      <p class="auth-status">
+    <nav class="navbar">
+      <h1 class="logo">Rate The Plate</h1>
+
+      <ul class="nav-links">
+        <li><a href="{% url 'show_all_cars' %}">Home</a></li>
+
         {% if request.user.is_authenticated %}
-          Logged in as {{ request.user.username }}
+          <li><a href="{% url 'my_account' %}">Account</a></li>
+          <li>
+            <form method="POST" action="{% url 'logout' %}" class="logout-form">
+              {% csrf_token %}
+              <button class="nav-btn" type="submit">Log out</button>
+            </form>
+          </li>
         {% else %}
-          Not logged in
+          <li><a href="{% url 'login' %}">Log in</a></li>
         {% endif %}
-      </p>
-    </div>
+      </ul>
+    </nav>
 
     {% block content %}
     {% endblock %}
-
-    <footer>
-      <nav>
-        <ul>
-          <li><a href="{% url 'show_all_cars' %}">Home</a></li>
-
-          {% if request.user.is_authenticated %}
-            <li><a href="{% url 'my_account' %}">My Account</a></li>
-            <li>
-              <form method="POST" action="{% url 'logout' %}" class="logout-form">
-                {% csrf_token %}
-                <button type="submit">Log out</button>
-              </form>
-            </li>
-          {% else %}
-            <li><a href="{% url 'login' %}">Log in</a></li>
-          {% endif %}
-        </ul>
-      </nav>
-    </footer>
 
   </body>
 </html>

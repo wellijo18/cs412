@@ -1,18 +1,40 @@
-<!-- templates/rate_the_plate/show_car.html -->
-
 {% extends 'rate_the_plate/base.html' %}
 
 {% block content %}
-<h2>{{ car.license_plate }} ({{ car.state }})</h2>
 
-<p>Make: {{ car.make }}</p>
-<p>Model: {{ car.model }}</p>
-<p>Color: {{ car.color }}</p>
-<p>Year: {{ car.year }}</p>
+<div class="car-detail-page">
+  <div class="plate-display">
+    <p class="plate-label">License Plate</p>
+    <h2>{{ car.license_plate }}</h2>
+    <p class="plate-state">{{ car.state }}</p>
+  </div>
 
-{% if request.user.is_authenticated %}
-  <p><a href="{% url 'create_review' car.pk %}">Write a Review</a></p>
-{% endif %}
+  <div class="car-details-list">
+    <div>
+      <span>Make</span>
+      <p>{{ car.make }}</p>
+    </div>
+
+    <div>
+      <span>Model</span>
+      <p>{{ car.model }}</p>
+    </div>
+
+    <div>
+      <span>Color</span>
+      <p>{{ car.color }}</p>
+    </div>
+
+    <div>
+      <span>Year</span>
+      <p>{{ car.year }}</p>
+    </div>
+  </div>
+
+  {% if request.user.is_authenticated %}
+    <a class="button-link" href="{% url 'create_review' car.pk %}">Write a Review</a>
+  {% endif %}
+</div>
 
 <h3>Reviews</h3>
 
@@ -29,4 +51,5 @@
   <p>No reviews yet.</p>
 {% endfor %}
 </div>
+
 {% endblock %}

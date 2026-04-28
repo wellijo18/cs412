@@ -1,0 +1,31 @@
+{% extends 'rate_the_plate/base.html' %}
+
+{% block content %}
+
+<div class="review-form-card">
+  <h2>Write a Review</h2>
+
+  <div class="reviewing-car">
+    <p class="reviewing-label">Reviewing</p>
+    <p class="reviewing-plate">{{ car.license_plate }} ({{ car.state }})</p>
+  </div>
+
+  <form method="POST" class="review-form">
+    {% csrf_token %}
+
+    <div class="form-row">
+      <label>Rating</label>
+      {{ form.rating }}
+      <p class="form-help">Choose a number from 0 to 10.</p>
+    </div>
+
+    <div class="form-row">
+      <label>Review</label>
+      {{ form.review_text }}
+    </div>
+
+    <button type="submit">Submit Review</button>
+  </form>
+</div>
+
+{% endblock %}

@@ -99,7 +99,7 @@ class MyAccountView(AuthForMixin, ListView):
 
 class CreateReviewView(AuthForMixin, CreateView):
     form_class = CreateReviewForm
-    template_name = 'rate_the_plate/create_review_form.html'
+    template_name = 'rate_the_plate/create_review.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -147,7 +147,7 @@ class DeleteReviewView(AuthForMixin, DeleteView):
 
 class CreateCommentView(AuthForMixin, CreateView):
     form_class = CreateCommentForm
-    template_name = 'rate_the_plate/create_comment_form.html'
+    template_name = 'rate_the_plate/create_comment.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

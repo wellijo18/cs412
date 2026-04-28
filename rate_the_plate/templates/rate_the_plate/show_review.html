@@ -1,33 +1,55 @@
-<!-- templates/rate_the_plate/show_review.html -->
-
 {% extends 'rate_the_plate/base.html' %}
 
 {% block content %}
-<h2>Review for {{ review.car.license_plate }} ({{ review.car.state }})</h2>
 
-<p>By: {{ review.user.username }}</p>
-<p>Rating: {{ review.rating }}</p>
-<p>{{ review.review_text }}</p>
-<p>Posted: {{ review.date_posted }}</p>
+<div class="review-detail-card">
+  <div class="review-detail-header">
+    <div>
+      <h2>Review for {{ review.car.license_plate }}</h2>
+      <p>{{ review.car.state }}</p>
+    </div>
 
-<p>Likes: {{ review.reviewreaction_set.all|length }}</p>
+    <div class="rating-badge">
+      {{ review.rating }}/10
+    </div>
+  </div>
 
-{% if request.user.is_authenticated %}
-  <p><a href="{% url 'like_review' review.pk %}">Like</a></p>
-  <p><a href="{% url 'dislike_review' review.pk %}">Dislike</a></p>
-  <p><a href="{% url 'remove_reaction' review.pk %}">Remove Reaction</a></p>
-  <p><a href="{% url 'create_comment' review.pk %}">Add Comment</a></p>
-{% endif %}
+  <div class="review-body">
+    <p>{{ review.review_text }}</p>
+  </div>
+
+  <div class="review-meta">
+    <p>By {{ review.user.username }}</p>
+    <p>{{ review.date_posted }}</p>
+  </div>
+
+  <div class="reaction-counts">
+    <span>Likes: {{ like_count }}</span>
+    <span>Dislikes: {{ dislike_count }}</span>
+  </div>
+
+  {% if request.user.is_authenticated %}
+    <div class="review-actions">
+      <a href="{% url 'like_review' review.pk %}">Like</a>
+      <a href="{% url 'dislike_review' review.pk %}">Dislike</a>
+      <a href="{% url 'remove_reaction' review.pk %}">Remove Reaction</a>
+      <a href="{% url 'create_comment' review.pk %}">Add Comment</a>
+    </div>
+  {% endif %}
+</div>
 
 <h3>Comments</h3>
+
+<div class="comments-section">
 {% for comment in comments %}
-  <div>
-    <p>{{ comment.user.username }}</p>
+  <div class="comment-card">
+    <p class="comment-user">{{ comment.user.username }}</p>
     <p>{{ comment.text }}</p>
-    <p>{{ comment.date_posted }}</p>
+    <p class="comment-date">{{ comment.date_posted }}</p>
   </div>
-  <hr>
 {% empty %}
   <p>No comments yet.</p>
 {% endfor %}
+</div>
+
 {% endblock %}
