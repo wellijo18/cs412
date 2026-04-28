@@ -1,0 +1,95 @@
+<!-- templates/rate_the_plate/show_all_cars.html -->
+
+{% extends 'rate_the_plate/base.html' %}
+
+{% block content %}
+<h2>Search for a Driver</h2>
+
+<form method="GET" action="{% url 'show_all_cars' %}" class="search-form">
+  <label for="state">State:</label>
+  <select name="state" id="state">
+    <option value="">Select a state</option>
+    <option value="Alabama" {% if request.GET.state == 'Alabama' %}selected{% endif %}>Alabama</option>
+    <option value="Alaska" {% if request.GET.state == 'Alaska' %}selected{% endif %}>Alaska</option>
+    <option value="Arizona" {% if request.GET.state == 'Arizona' %}selected{% endif %}>Arizona</option>
+    <option value="Arkansas" {% if request.GET.state == 'Arkansas' %}selected{% endif %}>Arkansas</option>
+    <option value="California" {% if request.GET.state == 'California' %}selected{% endif %}>California</option>
+    <option value="Colorado" {% if request.GET.state == 'Colorado' %}selected{% endif %}>Colorado</option>
+    <option value="Connecticut" {% if request.GET.state == 'Connecticut' %}selected{% endif %}>Connecticut</option>
+    <option value="Delaware" {% if request.GET.state == 'Delaware' %}selected{% endif %}>Delaware</option>
+    <option value="Florida" {% if request.GET.state == 'Florida' %}selected{% endif %}>Florida</option>
+    <option value="Georgia" {% if request.GET.state == 'Georgia' %}selected{% endif %}>Georgia</option>
+    <option value="Hawaii" {% if request.GET.state == 'Hawaii' %}selected{% endif %}>Hawaii</option>
+    <option value="Idaho" {% if request.GET.state == 'Idaho' %}selected{% endif %}>Idaho</option>
+    <option value="Illinois" {% if request.GET.state == 'Illinois' %}selected{% endif %}>Illinois</option>
+    <option value="Indiana" {% if request.GET.state == 'Indiana' %}selected{% endif %}>Indiana</option>
+    <option value="Iowa" {% if request.GET.state == 'Iowa' %}selected{% endif %}>Iowa</option>
+    <option value="Kansas" {% if request.GET.state == 'Kansas' %}selected{% endif %}>Kansas</option>
+    <option value="Kentucky" {% if request.GET.state == 'Kentucky' %}selected{% endif %}>Kentucky</option>
+    <option value="Louisiana" {% if request.GET.state == 'Louisiana' %}selected{% endif %}>Louisiana</option>
+    <option value="Maine" {% if request.GET.state == 'Maine' %}selected{% endif %}>Maine</option>
+    <option value="Maryland" {% if request.GET.state == 'Maryland' %}selected{% endif %}>Maryland</option>
+    <option value="Massachusetts" {% if request.GET.state == 'Massachusetts' %}selected{% endif %}>Massachusetts</option>
+    <option value="Michigan" {% if request.GET.state == 'Michigan' %}selected{% endif %}>Michigan</option>
+    <option value="Minnesota" {% if request.GET.state == 'Minnesota' %}selected{% endif %}>Minnesota</option>
+    <option value="Mississippi" {% if request.GET.state == 'Mississippi' %}selected{% endif %}>Mississippi</option>
+    <option value="Missouri" {% if request.GET.state == 'Missouri' %}selected{% endif %}>Missouri</option>
+    <option value="Montana" {% if request.GET.state == 'Montana' %}selected{% endif %}>Montana</option>
+    <option value="Nebraska" {% if request.GET.state == 'Nebraska' %}selected{% endif %}>Nebraska</option>
+    <option value="Nevada" {% if request.GET.state == 'Nevada' %}selected{% endif %}>Nevada</option>
+    <option value="New Hampshire" {% if request.GET.state == 'New Hampshire' %}selected{% endif %}>New Hampshire</option>
+    <option value="New Jersey" {% if request.GET.state == 'New Jersey' %}selected{% endif %}>New Jersey</option>
+    <option value="New Mexico" {% if request.GET.state == 'New Mexico' %}selected{% endif %}>New Mexico</option>
+    <option value="New York" {% if request.GET.state == 'New York' %}selected{% endif %}>New York</option>
+    <option value="North Carolina" {% if request.GET.state == 'North Carolina' %}selected{% endif %}>North Carolina</option>
+    <option value="North Dakota" {% if request.GET.state == 'North Dakota' %}selected{% endif %}>North Dakota</option>
+    <option value="Ohio" {% if request.GET.state == 'Ohio' %}selected{% endif %}>Ohio</option>
+    <option value="Oklahoma" {% if request.GET.state == 'Oklahoma' %}selected{% endif %}>Oklahoma</option>
+    <option value="Oregon" {% if request.GET.state == 'Oregon' %}selected{% endif %}>Oregon</option>
+    <option value="Pennsylvania" {% if request.GET.state == 'Pennsylvania' %}selected{% endif %}>Pennsylvania</option>
+    <option value="Rhode Island" {% if request.GET.state == 'Rhode Island' %}selected{% endif %}>Rhode Island</option>
+    <option value="South Carolina" {% if request.GET.state == 'South Carolina' %}selected{% endif %}>South Carolina</option>
+    <option value="South Dakota" {% if request.GET.state == 'South Dakota' %}selected{% endif %}>South Dakota</option>
+    <option value="Tennessee" {% if request.GET.state == 'Tennessee' %}selected{% endif %}>Tennessee</option>
+    <option value="Texas" {% if request.GET.state == 'Texas' %}selected{% endif %}>Texas</option>
+    <option value="Utah" {% if request.GET.state == 'Utah' %}selected{% endif %}>Utah</option>
+    <option value="Vermont" {% if request.GET.state == 'Vermont' %}selected{% endif %}>Vermont</option>
+    <option value="Virginia" {% if request.GET.state == 'Virginia' %}selected{% endif %}>Virginia</option>
+    <option value="Washington" {% if request.GET.state == 'Washington' %}selected{% endif %}>Washington</option>
+    <option value="West Virginia" {% if request.GET.state == 'West Virginia' %}selected{% endif %}>West Virginia</option>
+    <option value="Wisconsin" {% if request.GET.state == 'Wisconsin' %}selected{% endif %}>Wisconsin</option>
+    <option value="Wyoming" {% if request.GET.state == 'Wyoming' %}selected{% endif %}>Wyoming</option>
+  </select>
+
+  <label for="license_plate">License Plate:</label>
+  <input
+    type="text"
+    name="license_plate"
+    id="license_plate"
+    maxlength="8"
+    value="{{ license_plate }}"
+    oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')"
+  >
+
+  <button type="submit">Search</button>
+</form>
+
+{% if state or license_plate %}
+  <h3>Results</h3>
+
+  {% if cars %}
+    <ul class="results-list">
+      {% for car in cars %}
+        <li>
+          <a href="{% url 'car' car.pk %}">
+            {{ car.license_plate }} ({{ car.state }})
+          </a>
+          <p>{{ car.make }} {{ car.model }} {{ car.year }} {{ car.color }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No cars matched your search.</p>
+  {% endif %}
+{% endif %}
+{% endblock %}

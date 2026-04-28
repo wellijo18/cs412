@@ -1,0 +1,35 @@
+<!-- templates/rate_the_plate/my_account.html -->
+
+{% extends 'rate_the_plate/base.html' %}
+
+{% block content %}
+<h2>My Account</h2>
+<p>User: {{ request.user.username }}</p>
+
+<h3>My Reviews</h3>
+
+<div class="reviews-container">
+{% for review in reviews %}
+  <div class="review-card">
+    <p>
+      <a href="{% url 'review' review.pk %}">
+        {{ review.car.license_plate }} ({{ review.car.state }})
+      </a>
+    </p>
+    <p>Rating: {{ review.rating }}</p>
+    <p>{{ review.review_text }}</p>
+    <p>Likes: {{ review.like_count }}</p>
+    <p>Dislikes: {{ review.dislike_count }}</p>
+
+    <h4>Comments</h4>
+    {% for comment in review.comments %}
+      <p>{{ comment.user.username }}: {{ comment.text }}</p>
+    {% empty %}
+      <p>No comments yet.</p>
+    {% endfor %}
+  </div>
+{% empty %}
+  <p>You have not made any reviews yet.</p>
+{% endfor %}
+</div>
+{% endblock %}

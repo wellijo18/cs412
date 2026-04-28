@@ -1,0 +1,33 @@
+<!-- templates/rate_the_plate/show_review.html -->
+
+{% extends 'rate_the_plate/base.html' %}
+
+{% block content %}
+<h2>Review for {{ review.car.license_plate }} ({{ review.car.state }})</h2>
+
+<p>By: {{ review.user.username }}</p>
+<p>Rating: {{ review.rating }}</p>
+<p>{{ review.review_text }}</p>
+<p>Posted: {{ review.date_posted }}</p>
+
+<p>Likes: {{ review.reviewreaction_set.all|length }}</p>
+
+{% if request.user.is_authenticated %}
+  <p><a href="{% url 'like_review' review.pk %}">Like</a></p>
+  <p><a href="{% url 'dislike_review' review.pk %}">Dislike</a></p>
+  <p><a href="{% url 'remove_reaction' review.pk %}">Remove Reaction</a></p>
+  <p><a href="{% url 'create_comment' review.pk %}">Add Comment</a></p>
+{% endif %}
+
+<h3>Comments</h3>
+{% for comment in comments %}
+  <div>
+    <p>{{ comment.user.username }}</p>
+    <p>{{ comment.text }}</p>
+    <p>{{ comment.date_posted }}</p>
+  </div>
+  <hr>
+{% empty %}
+  <p>No comments yet.</p>
+{% endfor %}
+{% endblock %}

@@ -1,1 +1,1 @@
-https://cs-webapps.bu.edu/wellijo/dadjokes/api/
+https://cs-webapps.bu.edu/wellijo/mini_insta/api/

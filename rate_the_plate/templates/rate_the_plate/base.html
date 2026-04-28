@@ -1,0 +1,45 @@
+{% load static %}
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'rate_the_plate/styles-blog.css' %}">
+  </head>
+
+  <body>
+
+    <div class="header">
+      <h1>Rate The Plate</h1>
+      <p class="auth-status">
+        {% if request.user.is_authenticated %}
+          Logged in as {{ request.user.username }}
+        {% else %}
+          Not logged in
+        {% endif %}
+      </p>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+      <nav>
+        <ul>
+          <li><a href="{% url 'show_all_cars' %}">Home</a></li>
+
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+            <li>
+              <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+              </form>
+            </li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Log in</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </footer>
+
+  </body>
+</html>

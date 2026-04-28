@@ -1,0 +1,32 @@
+<!-- templates/rate_the_plate/show_car.html -->
+
+{% extends 'rate_the_plate/base.html' %}
+
+{% block content %}
+<h2>{{ car.license_plate }} ({{ car.state }})</h2>
+
+<p>Make: {{ car.make }}</p>
+<p>Model: {{ car.model }}</p>
+<p>Color: {{ car.color }}</p>
+<p>Year: {{ car.year }}</p>
+
+{% if request.user.is_authenticated %}
+  <p><a href="{% url 'create_review' car.pk %}">Write a Review</a></p>
+{% endif %}
+
+<h3>Reviews</h3>
+
+<div class="reviews-container">
+{% for review in reviews %}
+  <div class="review-card">
+    <p><a href="{% url 'review' review.pk %}">{{ review.user.username }}</a></p>
+    <p>Rating: {{ review.rating }}</p>
+    <p>{{ review.review_text }}</p>
+    <p>Likes: {{ review.like_count }}</p>
+    <p>Dislikes: {{ review.dislike_count }}</p>
+  </div>
+{% empty %}
+  <p>No reviews yet.</p>
+{% endfor %}
+</div>
+{% endblock %}
