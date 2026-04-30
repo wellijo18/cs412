@@ -3,8 +3,12 @@
 {% extends 'rate_the_plate/base.html' %}
 
 {% block content %}
+
 <h2>My Account</h2>
-<p>User: {{ request.user.username }}</p>
+
+<p class="account-user">
+  Logged in as <strong>{{ request.user.username }}</strong>
+</p>
 
 <h3>My Reviews</h3>
 
@@ -29,7 +33,8 @@
     {% endfor %}
   </div>
 {% empty %}
-  <p>You have not made any reviews yet.</p>
+  <p class="empty-message">You have not made any reviews yet.</p>
 {% endfor %}
 </div>
+
 {% endblock %}

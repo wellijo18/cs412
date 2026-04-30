@@ -3,10 +3,12 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Car, Review, ReviewReaction, Comment
 from django.urls import reverse
-from .forms import CreateReviewForm, CreateCommentForm
+from .forms import CreateCarForm, CreateReviewForm, CreateCommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count, Avg
+import random
 
-# Create your views here.
+
 
 class AuthForMixin(LoginRequiredMixin):
     def get_login_url(self):
@@ -39,6 +41,18 @@ class CarListView(ListView):
         context = super().get_context_data(**kwargs)
         context['state'] = self.request.GET.get('state', '')
         context['license_plate'] = self.request.GET.get('license_plate', '')
+
+        cars_with_reviews = Car.objects.annotate(
+            num_reviews=Count('review')
+        ).filter(num_reviews__gt=0)
+
+        cars_list = list(cars_with_reviews)
+
+        if cars_list:
+            context['random_cars'] = random.sample(cars_list, min(len(cars_list), 3))
+        else:
+            context['random_cars'] = []
+
         return context
 
 
@@ -56,6 +70,10 @@ class CarDetailView(DetailView):
             review.dislike_count = ReviewReaction.objects.filter(review=review, reaction='dislike').count()
 
         context['reviews'] = reviews
+
+        avg = reviews.aggregate(avg_rating=Avg('rating'))['avg_rating']
+        context['avg_rating'] = round(avg, 1) if avg else None
+
         return context
 
 
@@ -118,7 +136,6 @@ class CreateReviewView(AuthForMixin, CreateView):
 
 
 class UpdateReviewView(AuthForMixin, UpdateView):
-    '''view to update a review'''
     model = Review
     form_class = CreateReviewForm
     template_name = 'rate_the_plate/update_review_form.html'
@@ -129,7 +146,6 @@ class UpdateReviewView(AuthForMixin, UpdateView):
 
 
 class DeleteReviewView(AuthForMixin, DeleteView):
-    '''view to delete a review'''
     model = Review
     template_name = 'rate_the_plate/delete_review_form.html'
     context_object_name = 'review'
@@ -192,3 +208,19 @@ class RemoveReactionView(AuthForMixin, TemplateView):
         review = Review.objects.get(pk=self.kwargs['pk'])
         ReviewReaction.objects.filter(user=request.user, review=review).delete()
         return redirect('review', pk=review.pk)
+
+
+class CreateCarView(AuthForMixin, CreateView):
+    form_class = CreateCarForm
+    template_name = 'rate_the_plate/create_car.html'
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['state'] = self.request.GET.get('state', '')
+        initial['license_plate'] = self.request.GET.get('license_plate', '')
+        return initial
+
+    def form_valid(self, form):
+        form.instance.license_plate = form.instance.license_plate.upper()
+        self.object = form.save()
+        return redirect('car', pk=self.object.pk)

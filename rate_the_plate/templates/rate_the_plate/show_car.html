@@ -1,3 +1,5 @@
+<!-- templates/rate_the_plate/show_car.html -->
+
 {% extends 'rate_the_plate/base.html' %}
 
 {% block content %}
@@ -7,6 +9,12 @@
     <p class="plate-label">License Plate</p>
     <h2>{{ car.license_plate }}</h2>
     <p class="plate-state">{{ car.state }}</p>
+
+    {% if avg_rating %}
+      <p class="avg-rating">Average Rating: <strong>{{ avg_rating }}/10</strong></p>
+    {% else %}
+      <p class="avg-rating">No ratings yet</p>
+    {% endif %}
   </div>
 
   <div class="car-details-list">

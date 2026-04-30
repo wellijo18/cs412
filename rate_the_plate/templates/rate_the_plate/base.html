@@ -1,3 +1,4 @@
+<!-- templates/rate_the_plate/base.html -->
 {% load static %}
 
 <html>
@@ -7,8 +8,10 @@
 
   <body>
 
-    <nav class="navbar">
-      <h1 class="logo">Rate The Plate</h1>
+    <div class="navbar">
+      <a href="{% url 'show_all_cars' %}" class="logo-link">
+        <h1 class="logo">Rate The Plate</h1>
+      </a>
 
       <ul class="nav-links">
         <li><a href="{% url 'show_all_cars' %}">Home</a></li>
@@ -18,14 +21,14 @@
           <li>
             <form method="POST" action="{% url 'logout' %}" class="logout-form">
               {% csrf_token %}
-              <button class="nav-btn" type="submit">Log out</button>
+              <button type="submit" class="nav-btn">Log out</button>
             </form>
           </li>
         {% else %}
           <li><a href="{% url 'login' %}">Log in</a></li>
         {% endif %}
       </ul>
-    </nav>
+    </div>
 
     {% block content %}
     {% endblock %}

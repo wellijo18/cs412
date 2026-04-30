@@ -1,55 +1,66 @@
+<!-- rate_the_plate/show_review.html -->
 {% extends 'rate_the_plate/base.html' %}
 
 {% block content %}
 
-<div class="review-detail-card">
-  <div class="review-detail-header">
-    <div>
-      <h2>Review for {{ review.car.license_plate }}</h2>
-      <p>{{ review.car.state }}</p>
+<div class="review-page">
+  <div class="review-detail-card">
+    <div class="review-detail-header">
+      <div>
+        <h2>
+          Review for 
+          <a href="{% url 'car' review.car.pk %}">
+            {{ review.car.license_plate }}
+          </a>
+        </h2>
+        <p class="review-state">{{ review.car.state }}</p>
+        <p class="back-to-car">
+          <a href="{% url 'car' review.car.pk %}">Back to car</a>
+        </p>
+      </div>
+
+      <div class="rating-badge">
+        {{ review.rating }}/10
+      </div>
     </div>
 
-    <div class="rating-badge">
-      {{ review.rating }}/10
+    <div class="review-body">
+      <p>{{ review.review_text }}</p>
     </div>
-  </div>
 
-  <div class="review-body">
-    <p>{{ review.review_text }}</p>
-  </div>
-
-  <div class="review-meta">
-    <p>By {{ review.user.username }}</p>
-    <p>{{ review.date_posted }}</p>
-  </div>
-
-  <div class="reaction-counts">
-    <span>Likes: {{ like_count }}</span>
-    <span>Dislikes: {{ dislike_count }}</span>
-  </div>
-
-  {% if request.user.is_authenticated %}
-    <div class="review-actions">
-      <a href="{% url 'like_review' review.pk %}">Like</a>
-      <a href="{% url 'dislike_review' review.pk %}">Dislike</a>
-      <a href="{% url 'remove_reaction' review.pk %}">Remove Reaction</a>
-      <a href="{% url 'create_comment' review.pk %}">Add Comment</a>
+    <div class="review-meta">
+      <p>By {{ review.user.username }}</p>
+      <p>{{ review.date_posted }}</p>
     </div>
-  {% endif %}
-</div>
 
-<h3>Comments</h3>
+    <div class="reaction-counts">
+      <span>Likes: {{ like_count }}</span>
+      <span>Dislikes: {{ dislike_count }}</span>
+    </div>
 
-<div class="comments-section">
-{% for comment in comments %}
-  <div class="comment-card">
-    <p class="comment-user">{{ comment.user.username }}</p>
-    <p>{{ comment.text }}</p>
-    <p class="comment-date">{{ comment.date_posted }}</p>
+    {% if request.user.is_authenticated %}
+      <div class="review-actions">
+        <a href="{% url 'like_review' review.pk %}">Like</a>
+        <a href="{% url 'dislike_review' review.pk %}">Dislike</a>
+        <a href="{% url 'remove_reaction' review.pk %}">Remove Reaction</a>
+        <a href="{% url 'create_comment' review.pk %}">Add Comment</a>
+      </div>
+    {% endif %}
   </div>
-{% empty %}
-  <p>No comments yet.</p>
-{% endfor %}
+
+  <h3>Comments</h3>
+
+  <div class="comments-section">
+  {% for comment in comments %}
+    <div class="comment-card">
+      <p class="comment-user">{{ comment.user.username }}</p>
+      <p>{{ comment.text }}</p>
+      <p class="comment-date">{{ comment.date_posted }}</p>
+    </div>
+  {% empty %}
+    <p class="empty-message">No comments yet.</p>
+  {% endfor %}
+  </div>
 </div>
 
 {% endblock %}

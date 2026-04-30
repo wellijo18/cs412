@@ -1,0 +1,47 @@
+<!-- templates/rate_the_plate/create_car.html -->
+
+{% extends 'rate_the_plate/base.html' %}
+
+{% block content %}
+
+<div class="page-card">
+  <h2>Add a Car</h2>
+
+  <form method="POST" class="car-form">
+    {% csrf_token %}
+
+    <div class="form-row">
+      <label>State</label>
+      {{ form.state }}
+    </div>
+
+    <div class="form-row">
+      <label>License Plate</label>
+      {{ form.license_plate }}
+    </div>
+
+    <div class="form-row">
+      <label>Make</label>
+      {{ form.make }}
+    </div>
+
+    <div class="form-row">
+      <label>Model</label>
+      {{ form.model }}
+    </div>
+
+    <div class="form-row">
+      <label>Color</label>
+      {{ form.color }}
+    </div>
+
+    <div class="form-row">
+      <label>Year</label>
+      {{ form.year }}
+    </div>
+
+    <button type="submit">Add Car</button>
+  </form>
+</div>
+
+{% endblock %}

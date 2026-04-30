@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+html {
+  background: #061226;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,6 +23,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
 }
 
 .logo {
@@ -75,12 +83,14 @@ h2 {
   font-size: 2rem;
   margin: 1.5rem 0 1rem 0;
   color: #bfdbfe;
+  text-align: center;
 }
 
 h3 {
   font-size: 1.5rem;
   margin: 1.5rem 0 1rem 0;
   color: #dbeafe;
+  text-align: center;
 }
 
 h4 {
@@ -126,16 +136,6 @@ form {
   padding: 1.2rem 2rem;
 }
 
-.search-form {
-  background: rgba(15, 35, 75, 0.95);
-  border: 1px solid #3b82f6;
-  border-radius: 16px;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 label {
   font-weight: 600;
 }
@@ -167,6 +167,46 @@ input[type="submit"]:hover {
   background: #3b82f6;
 }
 
+.page-card {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #102a52;
+  border: 1px solid #3b82f6;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.search-card {
+  max-width: 650px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: #102a52;
+  border: 1px solid #3b82f6;
+  border-radius: 14px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.search-form label {
+  margin-right: 0.3rem;
+}
+
+.search-form select,
+.search-form input {
+  max-width: 180px;
+}
+
+.search-form button {
+  margin-left: 0.5rem;
+}
+
 .results-list {
   max-width: 1000px;
   margin: 1rem auto;
@@ -183,108 +223,19 @@ input[type="submit"]:hover {
 }
 
 .reviews-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 1rem auto;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .review-card {
   width: 100%;
-  max-width: 850px;
+  max-width: 650px;
   background: #102a52;
   border: 1px solid #3b82f6;
   border-radius: 14px;
   padding: 1rem;
   margin: 0.8rem 0;
-}
-
-.page-card {
-  max-width: 480px;
-  margin: 3rem auto;
-  padding: 1.8rem;
-  background: #102a52;
-  border: 1px solid #3b82f6;
-  border-radius: 14px;
-  text-align: center;
-}
-
-.page-card h2 {
-  margin-top: 0;
-  margin-bottom: 1.3rem;
-  color: white;
-}
-
-.page-card p {
-  margin-bottom: 1rem;
-}
-
-.button-link {
-  display: inline-block;
-  margin-top: 0.8rem;
-  background: #2563eb;
-  color: white;
-  border-radius: 8px;
-  padding: 0.6rem 1rem;
-  text-decoration: none;
-}
-
-.button-link:hover {
-  background: #3b82f6;
-}
-
-.car-detail-page {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 2rem;
-}
-
-.plate-display {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.plate-display h2 {
-  margin: 0;
-  font-size: 2.2rem;
-  color: white;
-}
-
-.plate-state {
-  font-size: 0.9rem;
-  color: #93c5fd;
-}
-
-.car-details-list {
-  background: rgba(16, 42, 82, 0.8);
-  border: 1px solid #3b82f6;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.car-details-list div {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.8rem 1rem;
-  border-bottom: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-.car-details-list div:last-child {
-  border-bottom: none;
-}
-
-.car-details-list span {
-  color: #93c5fd;
-  font-weight: 600;
-}
-
-.review-detail-card {
-  max-width: 750px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #102a52;
-  border: 1px solid #3b82f6;
-  border-radius: 14px;
 }
 
 .review-actions a {
@@ -300,20 +251,9 @@ input[type="submit"]:hover {
   border-radius: 12px;
 }
 
-.review-form {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 .review-form textarea {
   width: 100%;
   min-height: 120px;
-}
-
-.review-form select,
-.review-form input {
-  width: 100%;
 }
 
 .review-form button {
@@ -321,39 +261,238 @@ input[type="submit"]:hover {
   margin-top: 0.6rem;
 }
 
-.login-form {
+.car-form {
   width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
-.login-form .form-row {
+.car-form .form-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
 }
 
-.login-form label {
-  display: block;
-  margin-bottom: 0.4rem;
+.car-form label {
+  width: 140px;
+  text-align: right;
+  margin-right: 1rem;
   color: #dbeafe;
+}
+
+.car-form input,
+.car-form select {
+  flex: 1;
+  max-width: 240px;
+}
+
+.car-form button {
+  display: block;
+  margin: 1.5rem auto 0 auto;
+  padding: 0.7rem 1.4rem;
+}
+
+.car-detail-page {
+  max-width: 750px;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  background: #102a52;
+  border: 1px solid #3b82f6;
+  border-radius: 14px;
+}
+
+.plate-display {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.plate-label {
+  color: #93c5fd;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.plate-display h2 {
+  color: white;
+  font-size: 2.6rem;
+  margin: 0.3rem 0;
+}
+
+.plate-state {
+  color: #dbeafe;
+  margin-top: 0.3rem;
+}
+
+.avg-rating {
+  font-size: 1.2rem;
+  color: #93c5fd;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.avg-rating strong {
+  color: white;
+  font-size: 1.4rem;
+}
+
+.car-details-list {
+  background: #07152d;
+  border: 1px solid #3b82f6;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.car-details-list div {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.car-details-list div:last-child {
+  border-bottom: none;
+}
+
+.car-details-list span {
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+.car-details-list p {
+  margin: 0;
+  color: white;
+}
+
+.car-detail-page .button-link {
+  display: block;
+  width: fit-content;
+  margin: 1.5rem auto 0 auto;
+}
+
+.account-user {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #93c5fd;
+  margin-bottom: 1.5rem;
+}
+
+.account-user strong {
+  color: white;
+}
+
+.empty-message {
   text-align: center;
 }
 
-.login-form input {
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
-  display: block;
-  padding: 0.7rem;
+.review-page {
+  max-width: 850px;
+  margin: 2.5rem auto;
+  padding: 0 2rem;
 }
 
-.login-form button {
-  width: 100%;
-  max-width: 320px;
-  margin: 0.8rem auto 0 auto;
-  display: block;
-  padding: 0.7rem;
+.review-page .review-detail-card {
+  background: #102a52;
+  border: 1px solid #3b82f6;
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.review-page .review-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.review-page .review-detail-header h2 {
+  text-align: left;
+  margin: 0;
+  color: white;
+}
+
+.review-page .review-state {
+  color: #93c5fd;
+  font-weight: 600;
+  margin-top: 0.4rem;
+}
+
+.review-page .rating-badge {
+  background: #2563eb;
+  color: white;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.review-page .review-body {
+  background: #07152d;
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.review-page .review-body p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.review-page .review-meta {
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.review-page .reaction-counts {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.review-page .review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.review-page .review-actions a {
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  margin-right: 0;
+}
+
+.review-page .review-actions a:hover {
+  background: #3b82f6;
+  text-decoration: none;
+}
+
+.review-page .comments-section {
+  max-width: 850px;
+  margin: 1rem auto 3rem auto;
+}
+
+.review-page .comment-card {
+  background: #102a52;
+  border: 1px solid #3b82f6;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.review-page .comment-user {
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+.review-page .comment-date {
+  color: #cbd5e1;
+  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
@@ -362,7 +501,39 @@ input[type="submit"]:hover {
     gap: 1rem;
   }
 
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-form select,
+  .search-form input {
+    max-width: none;
+    width: 100%;
+  }
+
+  .car-form .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .car-form label {
+    text-align: left;
+    margin-bottom: 0.3rem;
+  }
+
+  .car-form input,
+  .car-form select {
+    width: 100%;
+    max-width: none;
+  }
+
   .car-details-list div {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .review-page .review-detail-header {
     flex-direction: column;
   }
 }
