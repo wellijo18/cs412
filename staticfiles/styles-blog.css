@@ -222,6 +222,22 @@ input[type="submit"]:hover {
   margin-bottom: 1rem;
 }
 
+/* FIX FOR YOUR ISSUE */
+.no-results {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.no-results .button-link {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.search-instruction {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
 .reviews-container {
   display: flex;
   flex-direction: column;

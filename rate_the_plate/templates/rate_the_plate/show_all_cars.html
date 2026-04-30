@@ -5,7 +5,7 @@
 {% block content %}
 <h2>Search for a Driver</h2>
 
-<p style="text-align: center; margin-bottom: 1.5rem;">
+<p class="search-instruction">
   Enter License Plate Information to See Reviews!
 </p>
 
@@ -95,19 +95,21 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>No cars matched your search.</p>
+    <div class="no-results">
+      <p>No cars matched your search.</p>
 
-    {% if request.user.is_authenticated %}
-      <a class="button-link" href="{% url 'create_car' %}?state={{ request.GET.state }}&license_plate={{ request.GET.license_plate }}">
-        Add this car
-      </a>
-    {% else %}
-      <p>
-        <a href="{% url 'login' %}?next={% url 'create_car' %}">
-          Log in to add this car
+      {% if request.user.is_authenticated %}
+        <a class="button-link" href="{% url 'create_car' %}?state={{ request.GET.state }}&license_plate={{ request.GET.license_plate }}">
+          Add this car
         </a>
-      </p>
-    {% endif %}
+      {% else %}
+        <p>
+          <a href="{% url 'login' %}?next={% url 'create_car' %}">
+            Log in to add this car
+          </a>
+        </p>
+      {% endif %}
+    </div>
   {% endif %}
 {% else %}
   {% if random_cars %}
